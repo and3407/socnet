@@ -1,0 +1,17 @@
+{
+  "name": "socnet/api",
+  "description": "Social Network API",
+  "type": "project",
+  "require": {
+    "php": ">=8.4",
+    "ramsey/uuid": "^4.9",
+    "ext-pdo": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/"
+    }
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true
+}
