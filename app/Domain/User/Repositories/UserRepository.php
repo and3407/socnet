@@ -18,6 +18,15 @@ class UserRepository
         $this->pdo = Db::getInstance();
     }
 
+    public function batchInsert(array $values): void
+    {
+        $sql = "INSERT INTO users (UUID, first_name, second_name, password, birthdate, city) VALUES " . implode(',', $values);
+
+        $stmt = $this->pdo->prepare($sql);
+
+        $stmt->execute();
+    }
+
     public function getUserByUuid(string $uuid): ?User
     {
         $sql = <<<SQL
@@ -68,5 +77,41 @@ class UserRepository
             ':city' => $data['city'],
             ':biography' => $data['biography'] ?? null,
         ]);
+    }
+
+    public function searchByName(string $firstName, string $lastName): array
+    {
+        $sql = <<<SQL
+            SELECT * 
+            FROM `users`
+            WHERE first_name LIKE :first_name
+            AND second_name LIKE :second_name
+        SQL;
+
+        $stmt = $this->pdo->prepare($sql);
+
+        $stmt->execute([
+            ':first_name' => '%' . $firstName . '%',
+            ':second_name' => '%' . $lastName . '%',
+        ]);
+
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $result = [];
+
+        foreach ($rows as $data) {
+            $result[] = new User(
+                $data['id'],
+                $data['uuid'],
+                $data['first_name'],
+                $data['second_name'],
+                $data['birthdate'],
+                $data['biography'] ?? '',
+                $data['city'],
+                $data['password'],
+            );
+        }
+
+        return $result;
     }
 }

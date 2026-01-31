@@ -8,6 +8,12 @@ use App\Middlewares\AuthMiddelware;
 
 class Router
 {
+    private UserController $userController;
+    public function __construct()
+    {
+        $this->userController = new UserController();
+    }
+
     public function routing(): void
     {
         $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
@@ -19,11 +25,13 @@ class Router
             $controller = new UserController();
             $controller->userRegister();
         } elseif ($requestUri === '/user/get' && $_SERVER['REQUEST_METHOD'] === 'GET') {
-
             AuthMiddelware::execute();
 
-            $controller = new UserController();
-            $controller->userGet();
+            $this->userController->userGet();
+        } elseif ($requestUri === '/user/search' && $_SERVER['REQUEST_METHOD'] === 'GET') {
+            AuthMiddelware::execute();
+
+            $this->userController->userSearch();
         } else {
             http_response_code(404);
             header('Content-Type: application/json');
