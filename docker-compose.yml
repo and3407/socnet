@@ -3,7 +3,7 @@ services:
     image: nginx:alpine
     container_name: socnet_nginx
     ports:
-      - "8080:80"
+      - "8383:80"
     volumes:
       - ./:/var/www
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
@@ -51,7 +51,7 @@ services:
     container_name: socnet_phpmyadmin
 #    restart: always
     ports:
-      - "8081:80"
+      - "8083:80"
     environment:
       PMA_HOST: mysql
       MYSQL_ROOT_PASSWORD: root
