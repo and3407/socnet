@@ -10,7 +10,7 @@ class User
         public readonly string $firstName,
         public readonly string $secondName,
         public readonly string $birthdate,
-        public readonly string $biography,
+        public readonly ?string $biography,
         public readonly string $city,
         public readonly string $password,
     ) { }
