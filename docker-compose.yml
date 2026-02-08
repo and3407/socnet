@@ -9,7 +9,7 @@ services:
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - php
-      - mysql
+#      - mysql
     networks:
       - socnet-network
 
@@ -26,42 +26,76 @@ services:
       - DB_NAME=socnet
       - DB_USER=root
       - DB_PASSWORD=root
-    depends_on:
-      - mysql
+#    depends_on:
+#      - mysql
     networks:
       - socnet-network
 
-  mysql:
-    image: mysql:8.0
-    container_name: socnet_mysql
-#    restart: always
+#  mysql:
+#    image: mysql:8.0
+#    container_name: socnet_mysql
+##    restart: always
+#    environment:
+#      MYSQL_ROOT_PASSWORD: root
+#      MYSQL_DATABASE: socnet
+#      MYSQL_PASSWORD: root
+#    ports:
+#      - "3306:3306"
+#    volumes:
+#      - mysql_data:/var/lib/mysql
+#    networks:
+#      - socnet-network
+
+    # Главная база данных (мастер) - пока единственная
+  dbmain:
+    image: postgres:16-alpine
+    container_name: pg-master
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: socnet
-      MYSQL_PASSWORD: root
+      POSTGRES_USER: master_user
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: socnet
     ports:
-      - "3306:3306"
+      - "5432:5432" # Пробрасываем порт для удобства подключения с хоста
     volumes:
-      - mysql_data:/var/lib/mysql
+      - postgres-master-data:/var/lib/postgresql/data
+      - ./postgres/master-init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - socnet-network
+    # Пока не трогаем настройки репликации в конфиге
+    # command: ["postgres", "-c", "wal_level=replica", "-c", "max_wal_senders=10"]
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - dbmain
     networks:
       - socnet-network
 
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    container_name: socnet_phpmyadmin
-#    restart: always
-    ports:
-      - "8083:80"
-    environment:
-      PMA_HOST: mysql
-      MYSQL_ROOT_PASSWORD: root
-    depends_on:
-      - mysql
-    networks:
-      - socnet-network
+#  phpmyadmin:
+#    image: phpmyadmin/phpmyadmin
+#    container_name: socnet_phpmyadmin
+##    restart: always
+#    ports:
+#      - "8083:80"
+#    environment:
+#      PMA_HOST: mysql
+#      MYSQL_ROOT_PASSWORD: root
+#    depends_on:
+#      - mysql
+#    networks:
+#      - socnet-network
+
+#volumes:
+#  mysql_data:
 
 volumes:
-  mysql_data:
+  postgres-master-data:
 
 networks:
   socnet-network:
