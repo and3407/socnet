@@ -83,7 +83,7 @@ class UserRepository
     {
         $sql = <<<SQL
             SELECT *
-            FROM `users`
+            FROM users
             WHERE first_name LIKE :first_name
             AND second_name LIKE :second_name
         SQL;
