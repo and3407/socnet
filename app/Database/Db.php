@@ -24,13 +24,21 @@ class Db
 
     private static function createConnection(): PDO
     {
+//        $dsn = sprintf(
+//            '%s:host=%s;port=%s;dbname=%s;charset=%s',
+//            Config::get('DB_DRIVER'),
+//            Config::get('DB_HOST'),
+//            Config::get('DB_PORT'),
+//            Config::get('DB_NAME'),
+//            Config::get('DB_CHARSET'),
+//        );
+
         $dsn = sprintf(
-            '%s:host=%s;port=%s;dbname=%s;charset=%s',
+            '%s:host=%s;port=%s;dbname=%s',
             Config::get('DB_DRIVER'),
             Config::get('DB_HOST'),
             Config::get('DB_PORT'),
             Config::get('DB_NAME'),
-            Config::get('DB_CHARSET'),
         );
 
         try {
@@ -47,7 +55,7 @@ class Db
             );
 
             // Устанавливаем timezone
-            $pdo->exec("SET time_zone = '+03:00'");
+//            $pdo->exec("SET time_zone = '+03:00'");
 
             return $pdo;
         } catch (PDOException $e) {

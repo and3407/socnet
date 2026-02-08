@@ -42,9 +42,22 @@ class Migration
 
     public function createUsersTable(): void
     {
+//        $sql = <<<SQL
+//            CREATE TABLE IF NOT EXISTS `users` (
+//                id INT AUTO_INCREMENT PRIMARY KEY,
+//                uuid VARCHAR(255) NOT NULL,
+//                first_name VARCHAR(255) NOT NULL,
+//                second_name VARCHAR(255) NOT NULL,
+//                password TEXT NOT NULL,
+//                birthdate DATE NOT NULL,
+//                city VARCHAR(255) NOT NULL,
+//                biography TEXT DEFAULT NULL
+//            )
+//        SQL;
+
         $sql = <<<SQL
-            CREATE TABLE IF NOT EXISTS `users_4` (
-                id INT AUTO_INCREMENT PRIMARY KEY,
+            CREATE TABLE IF NOT EXISTS users (
+                id SERIAL PRIMARY KEY,
                 uuid VARCHAR(255) NOT NULL,
                 first_name VARCHAR(255) NOT NULL,
                 second_name VARCHAR(255) NOT NULL,
@@ -52,7 +65,7 @@ class Migration
                 birthdate DATE NOT NULL,
                 city VARCHAR(255) NOT NULL,
                 biography TEXT DEFAULT NULL
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+            )
         SQL;
 
         $this->pdo->exec($sql);
@@ -61,14 +74,24 @@ class Migration
 
     public function createTokensTable(): void
     {
+//        $sql = <<<SQL
+//            CREATE TABLE IF NOT EXISTS `tokens` (
+//                id INT AUTO_INCREMENT PRIMARY KEY,
+//                user_id INT NOT NULL,
+//                token TEXT NOT NULL,
+//                created_at TIMESTAMP NOT NULL,
+//                expired_at TIMESTAMP NOT NULL
+//            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+//        SQL;
+
         $sql = <<<SQL
-            CREATE TABLE IF NOT EXISTS `tokens` (
-                id INT AUTO_INCREMENT PRIMARY KEY,
+            CREATE TABLE IF NOT EXISTS tokens (
+                id SERIAL PRIMARY KEY,
                 user_id INT NOT NULL,
                 token TEXT NOT NULL,
-                created_at TIMESTAMP NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
                 expired_at TIMESTAMP NOT NULL
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+            )
         SQL;
 
         $this->pdo->exec($sql);
