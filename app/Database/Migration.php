@@ -43,7 +43,7 @@ class Migration
     public function createUsersTable(): void
     {
         $sql = <<<SQL
-            CREATE TABLE IF NOT EXISTS `users` (
+            CREATE TABLE IF NOT EXISTS `users_4` (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 uuid VARCHAR(255) NOT NULL,
                 first_name VARCHAR(255) NOT NULL,

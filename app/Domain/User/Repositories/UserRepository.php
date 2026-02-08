@@ -82,18 +82,45 @@ class UserRepository
     public function searchByName(string $firstName, string $lastName): array
     {
         $sql = <<<SQL
-            SELECT * 
+            SELECT *
             FROM `users`
             WHERE first_name LIKE :first_name
             AND second_name LIKE :second_name
         SQL;
 
         $stmt = $this->pdo->prepare($sql);
-
+//
         $stmt->execute([
             ':first_name' => '%' . $firstName . '%',
             ':second_name' => '%' . $lastName . '%',
         ]);
+
+//        $stmt->execute([
+//            ':first_name' => $firstName . '%',
+//            ':second_name' => $lastName . '%',
+//        ]);
+
+        // -------------------------------
+//        $sql2 = <<<SQL
+//            SELECT * FROM users_3
+//            WHERE MATCH(first_name, second_name)
+//            AGAINST(? IN BOOLEAN MODE);
+//        SQL;
+//
+//         //Формируем поисковую строку
+//        $searchTerm = '';
+//        if (!empty($firstName) && !empty($lastName)) {
+//            // +Иван* +Петров* - оба должны присутствовать
+//            $searchTerm = '+' . $firstName . '* +' . $lastName . '*';
+//        } elseif (!empty($firstName)) {
+//            $searchTerm = $firstName . '*';
+//        } elseif (!empty($lastName)) {
+//            $searchTerm = $lastName . '*';
+//        }
+//
+//        $stmt = $this->pdo->prepare($sql2);
+//        $stmt->execute([$searchTerm]);
+        // -------------------------------
 
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
