@@ -51,13 +51,11 @@ services:
     image: postgres:17-alpine
     container_name: pgmain
     environment:
-      POSTGRES_USER: main_user
       POSTGRES_PASSWORD: admin
-      POSTGRES_DB: socnet
     ports:
       - "5432:5432"
     volumes:
-      - postgres-master-data:/var/lib/postgresql/data
+      - postgres-main-data:/var/lib/postgresql/data
     networks:
       - socnet-network
 
@@ -93,6 +91,9 @@ services:
 
 volumes:
   postgres-master-data:
+  postgres-main-data:
+  postgres-slave1-data:
+  postgres-slave2-data:
 
 networks:
   socnet-network:

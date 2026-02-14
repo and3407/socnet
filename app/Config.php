@@ -19,9 +19,9 @@ class Config
         'DB_DRIVER' => 'pgsql',
         'DB_HOST' => 'pgmain',
         'DB_PORT' => '5432',
-        'DB_NAME' => 'socnet',
+        'DB_NAME' => 'postgres',
         'DB_PASSWORD' => 'admin',
-        'DB_USER' => 'main_user',
+        'DB_USER' => 'postgres',
         'DB_CHARSET' => 'utf8mb4',
         'DB_COLLATION' => 'utf8mb4_unicode_ci',
     ];
