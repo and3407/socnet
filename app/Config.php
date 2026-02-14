@@ -17,11 +17,11 @@ class Config
 
     private const array CONFIGS = [
         'DB_DRIVER' => 'pgsql',
-        'DB_HOST' => 'dbmain',
+        'DB_HOST' => 'pgmain',
         'DB_PORT' => '5432',
         'DB_NAME' => 'socnet',
-        'DB_PASSWORD' => 'root',
-        'DB_USER' => 'master_user',
+        'DB_PASSWORD' => 'admin',
+        'DB_USER' => 'main_user',
         'DB_CHARSET' => 'utf8mb4',
         'DB_COLLATION' => 'utf8mb4_unicode_ci',
     ];
