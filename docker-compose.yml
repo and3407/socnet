@@ -55,14 +55,11 @@ services:
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: socnet
     ports:
-      - "5432:5432" # Пробрасываем порт для удобства подключения с хоста
+      - "5432:5432"
     volumes:
       - postgres-master-data:/var/lib/postgresql/data
-      - ./postgres/master-init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - socnet-network
-    # Пока не трогаем настройки репликации в конфиге
-    # command: ["postgres", "-c", "wal_level=replica", "-c", "max_wal_senders=10"]
 
   pgadmin:
     image: dpage/pgadmin4
