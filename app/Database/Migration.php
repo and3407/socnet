@@ -6,14 +6,16 @@ use PDO;
 
 class Migration
 {
-    private PDO $pdo;
+    private PDO $dbRead;
+    private PDO $dbWrite;
 
     /**
      * @throws \Exception
      */
     public function __construct()
     {
-        $this->pdo = Db::getInstance();
+        $this->dbWrite = Db::getInstance(Db::QUERY_TYPE_WRITE);
+        $this->dbRead = Db::getInstance();
     }
 
     public function run(): void
@@ -32,7 +34,7 @@ class Migration
 
         foreach ($tables as $table) {
             try {
-                $this->pdo->exec("DROP TABLE IF EXISTS $table");
+                $this->dbWrite->exec("DROP TABLE IF EXISTS $table");
                 echo "Table '$table' dropped.\n";
             } catch (\Exception $e) {
                 echo "Error dropping table '$table': " . $e->getMessage() . "\n";
@@ -68,7 +70,7 @@ class Migration
             )
         SQL;
 
-        $this->pdo->exec($sql);
+        $this->dbWrite->exec($sql);
         echo "Table 'users' created successfully.\n";
     }
 
@@ -94,7 +96,7 @@ class Migration
             )
         SQL;
 
-        $this->pdo->exec($sql);
+        $this->dbWrite->exec($sql);
         echo "Table 'tokens' created successfully.\n";
     }
 }

@@ -8,21 +8,23 @@ use PDO;
 
 class UserRepository
 {
-    private PDO $pdo;
+    private PDO $dbRead;
+    private PDO $dbWrite;
 
     /**
      * @throws \Exception
      */
     public function __construct()
     {
-        $this->pdo = Db::getInstance();
+        $this->dbWrite = Db::getInstance(Db::QUERY_TYPE_WRITE);
+        $this->dbRead = Db::getInstance();
     }
 
     public function batchInsert(array $values): void
     {
         $sql = "INSERT INTO users (UUID, first_name, second_name, password, birthdate, city) VALUES " . implode(',', $values);
 
-        $stmt = $this->pdo->prepare($sql);
+        $stmt = $this->dbWrite->prepare($sql);
 
         $stmt->execute();
     }
@@ -36,7 +38,7 @@ class UserRepository
             LIMIT 1;
         SQL;
 
-        $stmt = $this->pdo->prepare($sql);
+        $stmt = $this->dbRead->prepare($sql);
         $stmt->bindParam(':uuid', $uuid);
         $stmt->execute();
 
@@ -66,7 +68,7 @@ class UserRepository
         SQL;
 
 
-        $stmt = $this->pdo->prepare($sql);
+        $stmt = $this->dbWrite->prepare($sql);
 
         $stmt->execute([
             ':uuid' => $data['uuid'],
@@ -88,7 +90,7 @@ class UserRepository
             AND second_name LIKE :second_name
         SQL;
 
-        $stmt = $this->pdo->prepare($sql);
+        $stmt = $this->dbRead->prepare($sql);
 //
         $stmt->execute([
             ':first_name' => '%' . $firstName . '%',

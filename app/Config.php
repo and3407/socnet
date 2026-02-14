@@ -16,14 +16,50 @@ class Config
 //    ];
 
     private const array CONFIGS = [
-        'DB_DRIVER' => 'pgsql',
-        'DB_HOST' => 'pgmain',
-        'DB_PORT' => '5432',
-        'DB_NAME' => 'postgres',
-        'DB_PASSWORD' => 'admin',
-        'DB_USER' => 'postgres',
-        'DB_CHARSET' => 'utf8mb4',
-        'DB_COLLATION' => 'utf8mb4_unicode_ci',
+        'database' => [
+            'write' => [
+                'DB_DRIVER' => 'pgsql',
+                'DB_HOST' => 'pgmaster',
+                'DB_PORT' => '5432',
+                'DB_NAME' => 'postgres',
+                'DB_PASSWORD' => 'admin',
+                'DB_USER' => 'postgres',
+                'DB_CHARSET' => 'utf8mb4',
+                'DB_COLLATION' => 'utf8mb4_unicode_ci',
+            ],
+            'read' => [
+                [
+                    'DB_DRIVER' => 'pgsql',
+                    'DB_HOST' => 'pgslave1',
+                    'DB_PORT' => '5432',
+                    'DB_NAME' => 'postgres',
+                    'DB_PASSWORD' => 'admin',
+                    'DB_USER' => 'postgres',
+                    'DB_CHARSET' => 'utf8mb4',
+                    'DB_COLLATION' => 'utf8mb4_unicode_ci',
+                ],
+                [
+                    'DB_DRIVER' => 'pgsql',
+                    'DB_HOST' => 'pgslave2',
+                    'DB_PORT' => '5432',
+                    'DB_NAME' => 'postgres',
+                    'DB_PASSWORD' => 'admin',
+                    'DB_USER' => 'postgres',
+                    'DB_CHARSET' => 'utf8mb4',
+                    'DB_COLLATION' => 'utf8mb4_unicode_ci',
+                ],
+            ],
+            'common' => [
+                'DB_DRIVER' => 'pgsql',
+                'DB_HOST' => 'pgmain',
+                'DB_PORT' => '5432',
+                'DB_NAME' => 'postgres',
+                'DB_PASSWORD' => 'admin',
+                'DB_USER' => 'postgres',
+                'DB_CHARSET' => 'utf8mb4',
+                'DB_COLLATION' => 'utf8mb4_unicode_ci',
+            ],
+        ],
     ];
 
     public static function get(string $key): mixed

@@ -8,14 +8,16 @@ use PDO;
 
 class TokenRepository
 {
-    private PDO $pdo;
+    private PDO $dbRead;
+    private PDO $dbWrite;
 
     /**
      * @throws \Exception
      */
     public function __construct()
     {
-        $this->pdo = Db::getInstance();
+        $this->dbWrite = Db::getInstance(Db::QUERY_TYPE_WRITE);
+        $this->dbRead = Db::getInstance();
     }
 
     public function getTokenByToken(string $token): ?Token
@@ -27,7 +29,7 @@ class TokenRepository
             LIMIT 1;
         SQL;
 
-        $stmt = $this->pdo->prepare($sql);
+        $stmt = $this->dbRead->prepare($sql);
         $stmt->bindParam(':token', $token);
         $stmt->execute();
 
@@ -55,7 +57,7 @@ class TokenRepository
             LIMIT 1;
         SQL;
 
-        $stmt = $this->pdo->prepare($sql);
+        $stmt = $this->dbRead->prepare($sql);
         $stmt->bindParam(':user_id', $userId);
         $stmt->execute();
 
@@ -81,7 +83,7 @@ class TokenRepository
             WHERE id = :id
         SQL;
 
-        $stmt = $this->pdo->prepare($sql);
+        $stmt = $this->dbWrite->prepare($sql);
         $stmt->bindParam(':id', $tokenId);
         $stmt->execute();
     }
@@ -93,7 +95,7 @@ class TokenRepository
             VALUES (:user_id, :token, :created_at, :expired_at)
         SQL;
 
-        $stmt = $this->pdo->prepare($sql);
+        $stmt = $this->dbWrite->prepare($sql);
         $stmt->bindParam(':user_id', $userId);
         $stmt->bindParam(':token', $token);
         $stmt->bindParam(':created_at', $createdAt);
