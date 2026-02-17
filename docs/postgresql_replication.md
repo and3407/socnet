@@ -227,7 +227,7 @@
         ```
     2. Изменяем конфиг `pgmaster/postgresql.conf`
         ```conf
-        primary_conninfo = 'host=pgslave1 port=5432 user=replicator password=pass application_name=pgmaster'
+        primary_conninfo = 'host=pgslave1 port=5432 user=replicator password=admin application_name=pgmaster'
         ```
     3. Запустим `pgmaster`
        ```shell
