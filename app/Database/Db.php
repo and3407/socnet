@@ -45,7 +45,7 @@ class Db
             $configs = $configsDatabase['read'][$random];
         }
 
-//        $configs = $configsDatabase['common'];
+        $configs = $configsDatabase['common'];
 
         $dsn = sprintf(
             '%s:host=%s;port=%s;dbname=%s',

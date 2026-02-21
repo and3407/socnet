@@ -24,6 +24,9 @@ class Migration
 
         $this->createUsersTable();
         $this->createTokensTable();
+        $this->createPostsTable();
+        $this->createUserPostsTable();
+        $this->createUserFriendsTable();
 
         echo "All migrations completed successfully.\n";
     }
@@ -40,6 +43,48 @@ class Migration
                 echo "Error dropping table '$table': " . $e->getMessage() . "\n";
             }
         }
+    }
+
+    public function createPostsTable(): void
+    {
+        $sql = <<<SQL
+            CREATE TABLE IF NOT EXISTS posts (
+                id SERIAL PRIMARY KEY,
+                text TEXT NOT NULL,
+                author_user_id  INT NOT NULL
+            )
+        SQL;
+
+        $this->dbWrite->exec($sql);
+        echo "Table 'posts' created successfully.\n";
+    }
+
+    public function createUserPostsTable(): void
+    {
+        $sql = <<<SQL
+            CREATE TABLE IF NOT EXISTS user_posts (
+                id SERIAL PRIMARY KEY,
+                user_id  INT NOT NULL,
+                post_id  INT NOT NULL
+            )
+        SQL;
+
+        $this->dbWrite->exec($sql);
+        echo "Table 'user_posts' created successfully.\n";
+    }
+
+    public function createUserFriendsTable(): void
+    {
+        $sql = <<<SQL
+            CREATE TABLE IF NOT EXISTS user_friends (
+                id SERIAL PRIMARY KEY,
+                user_id  INT NOT NULL,
+                friend_user_id  INT NOT NULL
+            )
+        SQL;
+
+        $this->dbWrite->exec($sql);
+        echo "Table 'user_friends' created successfully.\n";
     }
 
     public function createUsersTable(): void
