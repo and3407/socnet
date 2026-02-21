@@ -2,7 +2,7 @@
 
 namespace App\Database\migrations\upload_friends;
 
-use App\Domain\User\Post\Repositories\PostRepository;
+use App\Domain\Post\Repositories\PostRepository;
 use App\Domain\User\Repositories\UserRepository;
 
 class UploadFriends

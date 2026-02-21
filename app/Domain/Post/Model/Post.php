@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\User\Post\Model;
+namespace App\Domain\Post\Model;
 
 class Post
 {

@@ -3,16 +3,19 @@
 namespace App\Middlewares;
 
 use App\Domain\Token\Repositories\TokenRepository;
+use App\Domain\User\Repositories\UserRepository;
 use App\Responses\ErrorResponse;
 use App\Responses\HttpCode;
 
 class AuthMiddelware
 {
     protected TokenRepository $tokenRepository;
+    protected UserRepository $userRepository;
 
     public function __construct()
     {
         $this->tokenRepository = new TokenRepository();
+        $this->userRepository = new UserRepository();
     }
 
     public static function execute(): void
@@ -27,6 +30,17 @@ class AuthMiddelware
         $token = $this->getBearerToken();
 
         if ($this->isValidateToken($token)) {
+            $token = $this->tokenRepository->getTokenByToken($token);
+            $user = $this->userRepository->getUserById($token->userid);
+
+            if ($user === null) {
+                ErrorResponse::createJson('Authorization header missing or invalid', HttpCode::UNAUTHORIZED);
+            }
+
+            session_start();
+
+            $_SESSION['authUserId'] = $user->id;
+
             return;
         }
 

@@ -2,7 +2,7 @@
 
 namespace App\Database\migrations\upload_posts;
 
-use App\Domain\User\Post\Repositories\PostRepository;
+use App\Domain\Post\Repositories\PostRepository;
 use App\Domain\User\Repositories\UserRepository;
 use Random\RandomException;
 

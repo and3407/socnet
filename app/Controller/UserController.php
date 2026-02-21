@@ -2,13 +2,17 @@
 
 namespace App\Controller;
 
+use App\Domain\Post\Usecases\GetUserPosts;
 use App\Domain\User\Dto\CreateUserDto;
+use App\Domain\User\Models\User;
 use App\Domain\User\Usecases\CreateUser;
 use App\Domain\User\Usecases\SearchUsers;
 use App\Requests\User\UserGetRequest;
+use App\Requests\User\UserPostsRequest;
 use App\Requests\User\UserRegisterRequest;
 use App\Requests\User\UserSearchRequest;
 use App\Responses\UserGetResponse;
+use App\Responses\UserPostsResponse;
 use App\Responses\UserRegisterResponse;
 use App\Responses\UserSearchResponse;
 
@@ -42,5 +46,17 @@ class UserController extends Controller
         $users = new SearchUsers()->searchByName($params['first_name'], $params['second_name']);
 
         UserSearchResponse::create($users)->json();
+    }
+
+    public function getUserPosts(): void
+    {
+        $params = new UserPostsRequest()->validation();
+
+        /** @var User $user */
+        $user = $params['user'];
+
+        $posts = new GetUserPosts()->getPosts($user->id);
+
+        UserPostsResponse::create($user)->json($posts);
     }
 }

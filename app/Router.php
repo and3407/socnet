@@ -32,7 +32,11 @@ class Router
             AuthMiddelware::execute();
 
             $this->userController->userSearch();
-        } else {
+        } elseif($requestUri === '/user/posts' && $_SERVER['REQUEST_METHOD'] === 'GET') {
+            AuthMiddelware::execute();
+
+            $this->userController->getUserPosts();
+        }else {
             http_response_code(404);
             header('Content-Type: application/json');
             echo json_encode(['error' => 'Not Found']);
