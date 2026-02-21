@@ -72,6 +72,33 @@ services:
     networks:
       - socnet-network
 
+  redis:
+    image: redis:7.2-alpine
+    container_name: redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - socnet-network
+
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    container_name: redis_commander
+    restart: unless-stopped
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+      - HTTP_USER=admin
+      - HTTP_PASSWORD=admin
+    ports:
+      - "8085:8081"
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - socnet-network
+
 #  phpmyadmin:
 #    image: phpmyadmin/phpmyadmin
 #    container_name: socnet_phpmyadmin
@@ -94,6 +121,7 @@ volumes:
   postgres-main-data:
   postgres-slave1-data:
   postgres-slave2-data:
+  redis-data:
 
 networks:
   socnet-network:

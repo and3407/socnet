@@ -55,7 +55,7 @@ class UserController extends Controller
         /** @var User $user */
         $user = $params['user'];
 
-        $posts = new GetUserPosts()->getPosts($user->id);
+        $posts = new GetUserPosts()->getCacheWithPagination($user->id, $params['page']);
 
         UserPostsResponse::create($user)->json($posts);
     }

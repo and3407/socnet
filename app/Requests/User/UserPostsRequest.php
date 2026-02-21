@@ -11,6 +11,8 @@ class UserPostsRequest extends Request
 {
     public function validation(): array
     {
+        $params = $this->getQueryParams();
+
         if (empty($_SESSION['authUserId'])) {
             ErrorResponse::createJson('Invalid parameters.', HttpCode::BAD_REQUEST);
         }
@@ -23,6 +25,7 @@ class UserPostsRequest extends Request
 
         return [
             'user' => $user,
+            'page' => $params['page'] ?? 1,
         ];
     }
 
