@@ -20,6 +20,63 @@ class UserRepository
         $this->dbRead = Db::getInstance();
     }
 
+    public function getFirstUser(): ?User
+    {
+        $sql = <<<SQL
+            SELECT * FROM users LIMIT 1;
+        SQL;
+
+        $stmt = $this->dbRead->prepare($sql);
+        $stmt->execute();
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$data) {
+            return null;
+        }
+
+        return new User(
+            $data['id'],
+            $data['uuid'],
+            $data['first_name'],
+            $data['second_name'],
+            $data['birthdate'],
+            $data['biography'],
+            $data['city'],
+            $data['password'],
+        );
+    }
+    public function getUserById(int $id): ?User
+    {
+        $sql = <<<SQL
+            SELECT * 
+            FROM users 
+            WHERE id = :id
+            LIMIT 1;
+        SQL;
+
+        $stmt = $this->dbRead->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$data) {
+            return null;
+        }
+
+        return new User(
+            $data['id'],
+            $data['uuid'],
+            $data['first_name'],
+            $data['second_name'],
+            $data['birthdate'],
+            $data['biography'],
+            $data['city'],
+            $data['password'],
+        );
+    }
+
+
     public function batchInsert(array $values): void
     {
         $sql = "INSERT INTO users (UUID, first_name, second_name, password, birthdate, city) VALUES " . implode(',', $values);
@@ -58,6 +115,95 @@ class UserRepository
             $data['city'],
             $data['password'],
         );
+    }
+
+    public function getAllUsers(int $batchCount = 1000): \Generator
+    {
+        $sql = <<<SQL
+            SELECT * 
+            FROM users 
+            ORDER BY id
+            LIMIT :limit
+            OFFSET :offset;
+        SQL;
+
+        $stmt = $this->dbRead->prepare($sql);
+        $stmt->bindParam(':limit', $batchCount, PDO::PARAM_INT);
+
+        $offset = 0;
+
+        do {
+            $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+            $stmt->execute();
+
+            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            if (empty($rows)) {
+                break;
+            }
+
+            foreach ($rows as $data) {
+                yield new User(
+                    $data['id'],
+                    $data['uuid'],
+                    $data['first_name'],
+                    $data['second_name'],
+                    $data['birthdate'],
+                    $data['biography'] ?? '',
+                    $data['city'],
+                    $data['password']
+                );
+            }
+
+            $offset += $batchCount;
+
+        } while (count($rows) === $batchCount);
+    }
+
+    public function addFriend(int $userId, int $friendUserId): void
+    {
+        $sql = <<<SQL
+            INSERT INTO user_friends (user_id, friend_user_id) 
+            VALUES (:user_id, :friend_user_id)
+        SQL;
+
+        $stmt = $this->dbWrite->prepare($sql);
+
+        $stmt->execute([
+            ':user_id' => $userId,
+            ':friend_user_id' => $friendUserId,
+        ]);
+    }
+
+    public function addFriends(int $userId, array $friendIds): void
+    {
+
+        if (empty($friendIds)) {
+            return;
+        }
+
+        // Убираем дубликаты и пустые значения
+        $friendIds = array_unique(array_filter($friendIds));
+
+        // Подготавливаем множественную вставку
+        $placeholders = [];
+        $params = [];
+
+        foreach ($friendIds as $index => $friendId) {
+            $placeholders[] = "(:user_id, :friend_user_id_{$index})";
+            $params[":friend_user_id_{$index}"] = $friendId;
+        }
+
+        // Добавляем userId один раз для всех плейсхолдеров
+        $params[':user_id'] = $userId;
+
+        $sql = sprintf(
+            "INSERT INTO user_friends (user_id, friend_user_id) VALUES %s",
+            implode(', ', $placeholders)
+        );
+
+        $stmt = $this->dbWrite->prepare($sql);
+        $stmt->execute($params);
     }
 
     public function createUser(array $data): void

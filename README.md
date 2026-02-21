@@ -16,6 +16,24 @@ composer install
 Миграции php migrate.php
 ````
 
+Заполнить users 
+```` 
+сd app/Database/migrations/upload_users 
+php run.php
+````
+
+Заполнить posts
+```` 
+сd app/Database/migrations/upload_posts
+php run.php
+````
+
+Заполнить user_friends
+```` 
+сd app/Database/migrations/upload_posts
+php run.php
+````
+
 3. Postman коллекция в корне проекта ```` social_network.postman_collection.json ````
 
 Перменные коллекции:
