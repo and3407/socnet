@@ -51,7 +51,10 @@ class Migration
             CREATE TABLE IF NOT EXISTS posts (
                 id SERIAL PRIMARY KEY,
                 text TEXT NOT NULL,
-                author_user_id  INT NOT NULL
+                author_user_id  INT NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT NULL,
+                deleted_at TIMESTAMP DEFAULT NULL
             )
         SQL;
 
