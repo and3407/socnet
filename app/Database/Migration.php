@@ -25,7 +25,7 @@ class Migration
         $this->createUsersTable();
         $this->createTokensTable();
         $this->createPostsTable();
-        $this->createUserPostsTable();
+//        $this->createUserPostsTable();
         $this->createUserFriendsTable();
 
         echo "All migrations completed successfully.\n";
