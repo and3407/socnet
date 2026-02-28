@@ -3,15 +3,19 @@
 namespace App;
 
 use App\Controller\AuthController;
+use App\Controller\DialogController;
 use App\Controller\UserController;
 use App\Middlewares\AuthMiddelware;
 
 class Router
 {
     private UserController $userController;
+    private DialogController $dialogController;
+
     public function __construct()
     {
         $this->userController = new UserController();
+        $this->dialogController = new DialogController();
     }
 
     public function routing(): void
@@ -36,6 +40,14 @@ class Router
             AuthMiddelware::execute();
 
             $this->userController->getUserPosts();
+        } elseif (preg_match('#^/dialog/(\d+)/send$#', $requestUri) && $_SERVER['REQUEST_METHOD'] === 'POST') {
+            AuthMiddelware::execute();
+
+            $this->dialogController->sendDialog();
+        } elseif(preg_match('#^/dialog/(\d+)/list$#', $requestUri) && $_SERVER['REQUEST_METHOD'] === 'GET') {
+            AuthMiddelware::execute();
+
+            $this->dialogController->getDialogByUser();
         }else {
             http_response_code(404);
             header('Content-Type: application/json');
