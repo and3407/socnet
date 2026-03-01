@@ -141,6 +141,20 @@ services:
     networks:
       - socnet-network
 
+  # --- Новые воркеры ---
+  worker3:
+    image: "citusdata/citus:12.1.3"
+    container_name: "citus_worker_3"
+    environment: *AUTH
+    networks:
+      - socnet-network
+  worker4:
+    image: "citusdata/citus:12.1.3"
+    container_name: "citus_worker_4"
+    environment: *AUTH
+    networks:
+      - socnet-network
+
 volumes:
   postgres-master-data:
   postgres-main-data:
