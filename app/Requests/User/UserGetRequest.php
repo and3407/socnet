@@ -28,7 +28,7 @@ class UserGetRequest extends Request
         ];
     }
 
-    private function getUserRepository(): UserRepository
+    protected function getUserRepository(): UserRepository
     {
         return new UserRepository();
     }
