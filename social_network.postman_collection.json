@@ -12,7 +12,7 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "{{host}}/user/get?uuid=c51405a3-b915-469c-a81c-04181b63f79c",
+          "raw": "{{host}}/user/get?uuid=514f4cef-8e8d-4fc9-a7bc-ce5156bf8543",
           "host": [
             "{{host}}"
           ],
@@ -23,7 +23,7 @@
           "query": [
             {
               "key": "uuid",
-              "value": "c51405a3-b915-469c-a81c-04181b63f79c"
+              "value": "514f4cef-8e8d-4fc9-a7bc-ce5156bf8543"
             }
           ]
         }
@@ -55,7 +55,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"uuid\": \"fbfdbf1b-d42d-4c06-bf74-b6ee93b8f3d8\",\n    \"password\": \"P@asword123\"\n}\n",
+          "raw": "{\n    \"uuid\": \"514f4cef-8e8d-4fc9-a7bc-ce5156bf8543\",\n    \"password\": \"P@asword123\"\n}\n",
           "options": {
             "raw": {
               "language": "json"
@@ -84,7 +84,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"first_name\": \"andrey\",\n    \"second_name\": \"balakirev\",\n    \"birthdate\": \"1987-09-03\",\n    \"biography\": \"guitar\",\n    \"city\": \"Самара\",\n    \"password\": \"qweQw1\"\n}",
+          "raw": "{\n    \"first_name\": \"andrey\",\n    \"second_name\": \"balakirev\",\n    \"birthdate\": \"1987-09-03\",\n    \"biography\": \"guitar\",\n    \"city\": \"Самара\",\n    \"password\": \"P@asword123\"\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -159,6 +159,53 @@
               "type": "text",
               "disabled": true
             }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "/dialog/{user_id}/send",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"text\": \"Привет, как дела!\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{host}}/dialog/4/send",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "dialog",
+            "4",
+            "send"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "/dialog/{user_id}/list",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{host}}/dialog/4/list",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "dialog",
+            "4",
+            "list"
           ]
         }
       },
