@@ -119,38 +119,25 @@ services:
   master:
     container_name: "citus_master"
     image: "citusdata/citus:12.1.3"
-    ports: [ "${COORDINATOR_EXTERNAL_PORT:-5435}:5432" ]
-    labels: [ "com.citusdata.role=Master" ]
+    ports: ["${COORDINATOR_EXTERNAL_PORT:-5435}:5432"]
     environment: &AUTH
       POSTGRES_USER: "${POSTGRES_USER:-postgres}"
-      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-admin}"
+      POSTGRES_PASSWORD: "admin"
       PGUSER: "${POSTGRES_USER:-postgres}"
-      PGPASSWORD: "${POSTGRES_PASSWORD}"
+      PGPASSWORD: "admin"
       POSTGRES_HOST_AUTH_METHOD: "${POSTGRES_HOST_AUTH_METHOD:-trust}"
     networks:
       - socnet-network
-  worker:
+  worker1:
     image: "citusdata/citus:12.1.3"
-    labels: [ "com.citusdata.role=Worker" ]
-    depends_on: [ manager ]
+    container_name: "citus_worker_1"
     environment: *AUTH
-    command: "/wait-for-manager.sh"
-    volumes:
-      - citus-volume:/healthcheck
     networks:
       - socnet-network
-  manager:
-    container_name: "citus_manager"
-    build:
-      context: .
-      dockerfile: Dockerfile.manager
-    volumes:
-      - "${DOCKER_SOCK:-/var/run/docker.sock}:/var/run/docker.sock"
-      - citus-volume:/healthcheck
-    depends_on: [ master ]
-    environment:
-      <<: *AUTH
-      DOCKER_API_VERSION: "1.44"
+  worker2:
+    image: "citusdata/citus:12.1.3"
+    container_name: "citus_worker_2"
+    environment: *AUTH
     networks:
       - socnet-network
 
