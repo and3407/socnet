@@ -4,6 +4,7 @@ namespace App;
 
 use App\Controller\AuthController;
 use App\Controller\DialogController;
+use App\Controller\PostController;
 use App\Controller\UserController;
 use App\Middlewares\AuthMiddelware;
 
@@ -12,10 +13,13 @@ class Router
     private UserController $userController;
     private DialogController $dialogController;
 
+    private PostController $postController;
+
     public function __construct()
     {
         $this->userController = new UserController();
         $this->dialogController = new DialogController();
+        $this->postController = new PostController();
     }
 
     public function routing(): void
@@ -48,7 +52,11 @@ class Router
             AuthMiddelware::execute();
 
             $this->dialogController->getDialogByUser();
-        }else {
+        } elseif ($requestUri === '/post/create' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+            AuthMiddelware::execute();
+
+            $this->postController->createPost();
+        } else {
             http_response_code(404);
             header('Content-Type: application/json');
             echo json_encode(['error' => 'Not Found']);

@@ -37,11 +37,12 @@ class PostRepository
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function createPost(array $data): void
+    public function createPost(array $data): ?int
     {
         $sql = <<<SQL
-            INSERT INTO posts (text, author_user_id, created_at) 
+            INSERT INTO posts (text, author_user_id, created_at)
             VALUES (:text, :author_user_id, :created_at)
+            RETURNING id
         SQL;
 
 
@@ -52,6 +53,10 @@ class PostRepository
             ':author_user_id' => $data['author_user_id'],
             ':created_at' => $data['created_at'],
         ]);
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $result ? (int) $result['id'] : null;
     }
 
     public function getRandomAuthorUserId(int $countId = 100): array
