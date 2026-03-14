@@ -83,6 +83,18 @@ services:
     networks:
       - socnet-network
 
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: socnet_rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+    networks:
+      - socnet-network
+
 #  redis-commander:
 #    image: rediscommander/redis-commander:latest
 #    container_name: redis_commander
@@ -116,30 +128,30 @@ services:
 #volumes:
 #  mysql_data:
 
-  master:
-    container_name: "citus_master"
-    image: "citusdata/citus:12.1.3"
-    ports: ["${COORDINATOR_EXTERNAL_PORT:-5435}:5432"]
-    environment: &AUTH
-      POSTGRES_USER: "${POSTGRES_USER:-postgres}"
-      POSTGRES_PASSWORD: "admin"
-      PGUSER: "${POSTGRES_USER:-postgres}"
-      PGPASSWORD: "admin"
-      POSTGRES_HOST_AUTH_METHOD: "${POSTGRES_HOST_AUTH_METHOD:-trust}"
-    networks:
-      - socnet-network
-  worker1:
-    image: "citusdata/citus:12.1.3"
-    container_name: "citus_worker_1"
-    environment: *AUTH
-    networks:
-      - socnet-network
-  worker2:
-    image: "citusdata/citus:12.1.3"
-    container_name: "citus_worker_2"
-    environment: *AUTH
-    networks:
-      - socnet-network
+#  master:
+#    container_name: "citus_master"
+#    image: "citusdata/citus:12.1.3"
+#    ports: ["${COORDINATOR_EXTERNAL_PORT:-5435}:5432"]
+#    environment: &AUTH
+#      POSTGRES_USER: "${POSTGRES_USER:-postgres}"
+#      POSTGRES_PASSWORD: "admin"
+#      PGUSER: "${POSTGRES_USER:-postgres}"
+#      PGPASSWORD: "admin"
+#      POSTGRES_HOST_AUTH_METHOD: "${POSTGRES_HOST_AUTH_METHOD:-trust}"
+#    networks:
+#      - socnet-network
+#  worker1:
+#    image: "citusdata/citus:12.1.3"
+#    container_name: "citus_worker_1"
+#    environment: *AUTH
+#    networks:
+#      - socnet-network
+#  worker2:
+#    image: "citusdata/citus:12.1.3"
+#    container_name: "citus_worker_2"
+#    environment: *AUTH
+#    networks:
+#      - socnet-network
 
   # --- Новые воркеры ---
 #  worker3:
