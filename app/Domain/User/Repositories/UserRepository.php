@@ -289,4 +289,20 @@ class UserRepository
 
         return $result;
     }
+
+    public function getFriendIds(int $userId): array
+    {
+        $sql = <<<SQL
+            SELECT friend_user_id
+            FROM user_friends
+            WHERE user_id = :user_id
+        SQL;
+
+        $stmt = $this->dbRead->prepare($sql);
+        $stmt->bindParam(':user_id', $userId);
+        $stmt->execute();
+
+        $rows = $stmt->fetchAll(PDO::FETCH_COLUMN, 0);
+        return $rows ?: [];
+    }
 }

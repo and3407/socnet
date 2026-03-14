@@ -6,7 +6,12 @@
     "php": ">=8.4",
     "ramsey/uuid": "^4.9",
     "ext-pdo": "*",
-    "php-amqplib/php-amqplib": "^3.7"
+    "php-amqplib/php-amqplib": "^3.7",
+    "cboden/ratchet": "^0.4.4",
+    "react/event-loop": "^1.5",
+    "react/socket": "^1.16",
+    "clue/redis-react": "^2.8",
+    "predis/predis": "^2.2"
   },
   "autoload": {
     "psr-4": {

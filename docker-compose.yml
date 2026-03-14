@@ -95,6 +95,37 @@ services:
     networks:
       - socnet-network
 
+  websocket:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: socnet_websocket
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./:/var/www
+    command: php /var/www/websocket-server.php
+    depends_on:
+      - redis
+      - rabbitmq
+    networks:
+      - socnet-network
+
+  rabbitmq-consumer:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: socnet_rabbitmq_consumer
+    volumes:
+      - ./:/var/www
+    command: php /var/www/rabbitmq-consumer.php
+    depends_on:
+      - redis
+      - rabbitmq
+      - pgmain
+    networks:
+      - socnet-network
+
 #  redis-commander:
 #    image: rediscommander/redis-commander:latest
 #    container_name: redis_commander
