@@ -60,6 +60,14 @@ class Config
                 'DB_COLLATION' => 'utf8mb4_unicode_ci',
             ],
         ],
+        'rabbitmq' => [
+            'host' => 'rabbitmq',
+            'port' => 5672,
+            'user' => 'admin',
+            'password' => 'admin',
+            'vhost' => '/',
+            'queue' => 'post_created',
+        ],
     ];
 
     public static function get(string $key): mixed
