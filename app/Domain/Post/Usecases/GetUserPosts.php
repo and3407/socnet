@@ -116,6 +116,21 @@ class GetUserPosts
         return $this->hasCache($userId);
     }
 
+    /**
+     * Обновить кеш для списка пользователей
+     */
+    public function refreshCacheForUsers(array $userIds): void
+    {
+        foreach ($userIds as $userId) {
+            try {
+                $this->refreshCache($userId);
+            } catch (\Exception $e) {
+                // Логируем ошибку, но продолжаем для остальных пользователей
+                error_log("Failed to refresh cache for user {$userId}: " . $e->getMessage());
+            }
+        }
+    }
+
     public function deleteCache(int $userId): bool
     {
         $key = $this->getUserPostsKey($userId);

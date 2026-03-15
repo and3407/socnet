@@ -3,6 +3,7 @@
 namespace App\WebSocket;
 
 use App\Domain\RabbitMQ\RabbitMQClient;
+use App\Domain\Post\Usecases\GetUserPosts;
 use App\Domain\Redis\RedisClient;
 use App\Domain\User\Repositories\UserRepository;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
@@ -13,6 +14,7 @@ class RabbitMQConsumer
     private AMQPStreamConnection $connection;
     private RedisClient $redisClient;
     private UserRepository $userRepository;
+    private GetUserPosts $getUserPosts;
     private string $queueName = 'post_created';
 
     public function __construct()
@@ -27,6 +29,7 @@ class RabbitMQConsumer
         );
         $this->redisClient = new RedisClient();
         $this->userRepository = new UserRepository();
+        $this->getUserPosts = new GetUserPosts();
     }
 
     public function consume(): void
@@ -94,6 +97,11 @@ class RabbitMQConsumer
 
         // Also publish to global channel for debugging
         $this->redisClient->client->publish('post_feed', $wsMessage);
+
+        // Refresh cache for friends
+        echo " [*] Refreshing cache for friends: " . implode(', ', $friendIds) . "\n";
+        $this->getUserPosts->refreshCacheForUsers($friendIds);
+        echo " [*] Cache refreshed\n";
     }
 
     public function __destruct()
