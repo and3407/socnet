@@ -55,7 +55,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"uuid\": \"514f4cef-8e8d-4fc9-a7bc-ce5156bf8543\",\n    \"password\": \"P@asword123\"\n}\n",
+          "raw": "{\n    \"uuid\": \"6bd9394b-669a-4455-ad7b-7fe2bfe4d65e\",\n    \"password\": \"P@asword123\"\n}\n",
           "options": {
             "raw": {
               "language": "json"
@@ -179,13 +179,13 @@
           }
         },
         "url": {
-          "raw": "{{host}}/dialog/4/send",
+          "raw": "{{host}}/dialog/5/send",
           "host": [
             "{{host}}"
           ],
           "path": [
             "dialog",
-            "4",
+            "5",
             "send"
           ]
         }
@@ -206,6 +206,40 @@
             "dialog",
             "4",
             "list"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "/post/create",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"text\": \"Hello world\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{host}}/post/create",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "post",
+            "create"
+          ],
+          "query": [
+            {
+              "key": "text",
+              "value": "Hello world",
+              "disabled": true
+            }
           ]
         }
       },
