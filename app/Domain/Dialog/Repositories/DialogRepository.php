@@ -5,7 +5,7 @@ namespace App\Domain\Dialog\Repositories;
 use App\Domain\Dialog\Db;
 use PDO;
 
-class DialogRepository
+class DialogRepository implements DialogRepositoryInterface
 {
     private Db $db;
 

@@ -68,6 +68,7 @@ class Config
             'vhost' => '/',
             'queue' => 'post_created',
         ],
+        'dialog_storage' => 'redis', // 'postgres' или 'redis'
     ];
 
     public static function get(string $key): mixed
