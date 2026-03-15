@@ -24,8 +24,9 @@ class DialogMigration
         $this->createDialogUserTable();
         echo 'createDialogUserTable' . PHP_EOL;
 
-        $this->createShard();
-        echo 'createShard' . PHP_EOL;
+        // Пропускаем шардирование, так как используется обычный PostgreSQL
+        // $this->createShard();
+        // echo 'createShard' . PHP_EOL;
     }
 
     public function createShard(): void

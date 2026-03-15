@@ -17,7 +17,7 @@ class Db
 
     public function __construct()
     {
-        $this->host = 'citus_master';
+        $this->host = 'pgmain';
         $this->port = 5432;
         $this->database = 'postgres';
         $this->username = 'postgres';
@@ -50,8 +50,8 @@ class Db
                     ]
                 );
 
-                // Проверяем расширение Citus
-                $this->checkCitusExtension();
+                // Проверяем расширение Citus (пропускаем для совместимости с обычным PostgreSQL)
+                // $this->checkCitusExtension();
 
             } catch (PDOException $e) {
                 throw new PDOException(
