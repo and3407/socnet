@@ -30,7 +30,7 @@ php run.php
 
 Заполнить user_friends
 ```` 
-сd app/Database/migrations/upload_posts
+сd app/Database/migrations/upload_friends
 php run.php
 ````
 
