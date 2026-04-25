@@ -7,6 +7,71 @@
   },
   "item": [
     {
+      "name": "dialogService",
+      "item": [
+        {
+          "name": "/api/v1/messages",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-User-Id",
+                "value": "7",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"recipient_user_id\": 5,\n  \"content\": \"Текст сообщения\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{dialog_host}}/api/v1/messages",
+              "host": [
+                "{{dialog_host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "messages"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/api/v1/dialogs/{userId}",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-User-Id",
+                "value": "7",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{dialog_host}}/api/v1/dialogs/7",
+              "host": [
+                "{{dialog_host}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "dialogs",
+                "7"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
       "name": "/user/get",
       "request": {
         "method": "GET",
@@ -198,13 +263,13 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "{{host}}/dialog/4/list",
+          "raw": "{{host}}/dialog/5/list",
           "host": [
             "{{host}}"
           ],
           "path": [
             "dialog",
-            "4",
+            "5",
             "list"
           ]
         }
@@ -287,6 +352,10 @@
     },
     {
       "key": "auth_token",
+      "value": ""
+    },
+    {
+      "key": "dialog_host",
       "value": ""
     }
   ]
