@@ -126,6 +126,27 @@ services:
     networks:
       - socnet-network
 
+  dialog-service:
+    build:
+      context: ./dialog-service
+      dockerfile: Dockerfile
+    container_name: socnet_dialog_service
+    volumes:
+      - ./dialog-service:/var/www
+    environment:
+      - DB_HOST=pgmain
+      - DB_PORT=5432
+      - DB_DATABASE=postgres
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=admin
+    ports:
+      - "9000:9000"
+    command: php -S 0.0.0.0:9000 -t public
+    depends_on:
+      - pgmain
+    networks:
+      - socnet-network
+
 #  redis-commander:
 #    image: rediscommander/redis-commander:latest
 #    container_name: redis_commander

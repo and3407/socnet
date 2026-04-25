@@ -2,8 +2,7 @@
 
 namespace App\Controller;
 
-use App\Domain\Dialog\Usecases\CreateMessage;
-use App\Domain\Dialog\Usecases\GetDialogByTwoUsers;
+use App\Domain\Dialog\DialogServiceClient;
 use App\Requests\Dialog\GetDialogByUserRequest;
 use App\Requests\Dialog\SendMessageRequest;
 use App\Responses\DIalog\GetDialogByUserResponse;
@@ -19,9 +18,10 @@ class DialogController extends Controller
 
         $authUser = $request->getAuthUser();
 
-        $useCase = new CreateMessage()->createMessage($authUser->id, $data);
+        $client = new DialogServiceClient();
+        $result = $client->sendMessage($authUser->id, $data['recipientUserId'], $data['content']);
 
-        SendMessageResponse::create($useCase['messageId'], $useCase['dialogId'])->json();
+        SendMessageResponse::create($result['messageId'], $result['dialogId'])->json();
     }
 
     public function getDialogByUser(): void
@@ -31,8 +31,9 @@ class DialogController extends Controller
         $data = $request->validation();
         $authUser = $request->getAuthUser();
 
-        $data = new GetDialogByTwoUsers()->getDialog($authUser->id, $data['userId']);
+        $client = new DialogServiceClient();
+        $messages = $client->getDialog($authUser->id, $data['userId']);
 
-        GetDialogByUserResponse::create($data)->json();
+        GetDialogByUserResponse::create($messages)->json();
     }
 }
