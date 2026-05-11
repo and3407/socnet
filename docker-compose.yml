@@ -47,15 +47,78 @@ services:
 #      - socnet-network
 
     # Главная база данных (мастер) - пока единственная
-  pgmain:
+#  pgmain:
+#    image: postgres:17-alpine
+#    container_name: pgmain
+#    environment:
+#      POSTGRES_PASSWORD: admin
+#    ports:
+#      - "5432:5432"
+#    volumes:
+#      - postgres-main-data:/var/lib/postgresql/data
+#    networks:
+#      - socnet-network
+
+  pgmaster:
     image: postgres:17-alpine
-    container_name: pgmain
+    container_name: pgmaster
     environment:
       POSTGRES_PASSWORD: admin
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
     ports:
-      - "5432:5432"
+      - "5434:5432"
     volumes:
-      - postgres-main-data:/var/lib/postgresql/data
+      - postgres-master-data:/var/lib/postgresql/data
+      - ./postgres/init-scripts/init-master.sh:/docker-entrypoint-initdb.d/init-master.sh
+    networks:
+      - socnet-network
+
+  pgslave1:
+    image: postgres:17-alpine
+    container_name: pgslave1
+    environment:
+      POSTGRES_PASSWORD: admin
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5435:5432"
+    volumes:
+      - postgres-slave1-data:/var/lib/postgresql/data
+      - ./postgres/init-scripts/init-slave.sh:/docker-entrypoint-initdb.d/init-slave.sh
+    depends_on:
+      - pgmaster
+    networks:
+      - socnet-network
+
+  pgslave2:
+    image: postgres:17-alpine
+    container_name: pgslave2
+    environment:
+      POSTGRES_PASSWORD: admin
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5436:5432"
+    volumes:
+      - postgres-slave2-data:/var/lib/postgresql/data
+      - ./postgres/init-scripts/init-slave.sh:/docker-entrypoint-initdb.d/init-slave.sh
+    depends_on:
+      - pgmaster
+    networks:
+      - socnet-network
+
+  haproxy:
+    image: haproxy:2.8-alpine
+    container_name: haproxy
+    ports:
+      - "5433:5433"
+      - "1936:1936"
+    volumes:
+      - ./docker/haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    depends_on:
+      - pgslave1
+      - pgslave2
     networks:
       - socnet-network
 
@@ -68,7 +131,7 @@ services:
     ports:
       - "5050:80"
     depends_on:
-      - pgmain
+      - pgmaster
     networks:
       - socnet-network
 
@@ -95,36 +158,36 @@ services:
     networks:
       - socnet-network
 
-  websocket:
-    build:
-      context: .
-      dockerfile: docker/php/Dockerfile
-    container_name: socnet_websocket
-    ports:
-      - "8080:8080"
-    volumes:
-      - ./:/var/www
-    command: php /var/www/websocket-server.php
-    depends_on:
-      - redis
-      - rabbitmq
-    networks:
-      - socnet-network
+#  websocket:
+#    build:
+#      context: .
+#      dockerfile: docker/php/Dockerfile
+#    container_name: socnet_websocket
+#    ports:
+#      - "8080:8080"
+#    volumes:
+#      - ./:/var/www
+#    command: php /var/www/websocket-server.php
+#    depends_on:
+#      - redis
+#      - rabbitmq
+#    networks:
+#      - socnet-network
 
-  rabbitmq-consumer:
-    build:
-      context: .
-      dockerfile: docker/php/Dockerfile
-    container_name: socnet_rabbitmq_consumer
-    volumes:
-      - ./:/var/www
-    command: php /var/www/rabbitmq-consumer.php
-    depends_on:
-      - redis
-      - rabbitmq
-      - pgmain
-    networks:
-      - socnet-network
+#  rabbitmq-consumer:
+#    build:
+#      context: .
+#      dockerfile: docker/php/Dockerfile
+#    container_name: socnet_rabbitmq_consumer
+#    volumes:
+#      - ./:/var/www
+#    command: php /var/www/rabbitmq-consumer.php
+#    depends_on:
+#      - redis
+#      - rabbitmq
+#      - pgmaster
+#    networks:
+#      - socnet-network
 
 #  redis-commander:
 #    image: rediscommander/redis-commander:latest

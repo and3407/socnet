@@ -11,31 +11,22 @@ class Db
     public const string QUERY_TYPE_READ = 'read';
     public const string QUERY_TYPE_WRITE = 'write';
 
-    private static ?PDO $instance = null;
+    private static array $instances = [];
 
     /**
      * @throws \Exception
      */
     public static function getInstance(string $queryType = self::QUERY_TYPE_READ): PDO
     {
-        if (self::$instance === null) {
-            self::$instance = self::createConnection($queryType);
+        if (!isset(self::$instances[$queryType])) {
+            self::$instances[$queryType] = self::createConnection($queryType);
         }
 
-        return self::$instance;
+        return self::$instances[$queryType];
     }
 
     private static function createConnection(string $queryType): PDO
     {
-//        $dsn = sprintf(
-//            '%s:host=%s;port=%s;dbname=%s;charset=%s',
-//            Config::get('DB_DRIVER'),
-//            Config::get('DB_HOST'),
-//            Config::get('DB_PORT'),
-//            Config::get('DB_NAME'),
-//            Config::get('DB_CHARSET'),
-//        );
-
         $configsDatabase = Config::get('database');
 
         if ($queryType === self::QUERY_TYPE_WRITE) {
@@ -44,8 +35,6 @@ class Db
             $random = random_int(0, 1);
             $configs = $configsDatabase['read'][$random];
         }
-
-        $configs = $configsDatabase['common'];
 
         $dsn = sprintf(
             '%s:host=%s;port=%s;dbname=%s',
@@ -68,9 +57,6 @@ class Db
                 ]
             );
 
-            // Устанавливаем timezone
-//            $pdo->exec("SET time_zone = '+03:00'");
-
             return $pdo;
         } catch (PDOException $e) {
             throw new \Exception("Database connection failed: " . $e->getMessage());
@@ -79,7 +65,7 @@ class Db
 
     public static function disconnect(): void
     {
-        self::$instance = null;
+        self::$instances = [];
     }
 
     public static function isConnected(): bool

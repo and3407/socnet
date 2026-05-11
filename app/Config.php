@@ -30,7 +30,7 @@ class Config
             'read' => [
                 [
                     'DB_DRIVER' => 'pgsql',
-                    'DB_HOST' => 'pgslave1',
+                    'DB_HOST' => 'pgmaster',
                     'DB_PORT' => '5432',
                     'DB_NAME' => 'postgres',
                     'DB_PASSWORD' => 'admin',
@@ -40,7 +40,7 @@ class Config
                 ],
                 [
                     'DB_DRIVER' => 'pgsql',
-                    'DB_HOST' => 'pgslave2',
+                    'DB_HOST' => 'pgmaster',
                     'DB_PORT' => '5432',
                     'DB_NAME' => 'postgres',
                     'DB_PASSWORD' => 'admin',

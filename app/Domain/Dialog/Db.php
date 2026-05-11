@@ -17,7 +17,7 @@ class Db
 
     public function __construct()
     {
-        $this->host = 'pgmain';
+        $this->host = 'pgmaster';
         $this->port = 5432;
         $this->database = 'postgres';
         $this->username = 'postgres';
