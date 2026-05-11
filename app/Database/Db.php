@@ -18,11 +18,12 @@ class Db
      */
     public static function getInstance(string $queryType = self::QUERY_TYPE_READ): PDO
     {
-        if (!isset(self::$instances[$queryType])) {
-            self::$instances[$queryType] = self::createConnection($queryType);
-        }
-
-        return self::$instances[$queryType];
+//        if (!isset(self::$instances[$queryType])) {
+//            self::$instances[$queryType] = self::createConnection($queryType);
+//        }
+//
+//        return self::$instances[$queryType];
+        return self::createConnection($queryType);
     }
 
     private static function createConnection(string $queryType): PDO
