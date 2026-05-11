@@ -30,8 +30,8 @@ class Config
             'read' => [
                 [
                     'DB_DRIVER' => 'pgsql',
-                    'DB_HOST' => 'pgmaster',
-                    'DB_PORT' => '5432',
+                    'DB_HOST' => 'haproxy',
+                    'DB_PORT' => '5433',
                     'DB_NAME' => 'postgres',
                     'DB_PASSWORD' => 'admin',
                     'DB_USER' => 'postgres',
@@ -40,8 +40,8 @@ class Config
                 ],
                 [
                     'DB_DRIVER' => 'pgsql',
-                    'DB_HOST' => 'pgmaster',
-                    'DB_PORT' => '5432',
+                    'DB_HOST' => 'haproxy',
+                    'DB_PORT' => '5433',
                     'DB_NAME' => 'postgres',
                     'DB_PASSWORD' => 'admin',
                     'DB_USER' => 'postgres',
