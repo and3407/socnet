@@ -8,16 +8,17 @@ class UserGetResponse extends Response
 {
     public function __construct(
         private readonly User $user,
+        private readonly array $data,
     ) { }
 
-    public static function create(User $user): self
+    public static function create(User $user, array $data): self
     {
-        return new self($user);
+        return new self($user, $data);
     }
 
     public function json(): void
     {
-        $result = [
+        $user = [
             'id' => $this->user->id,
             'uuid' => $this->user->uuid,
             'first_name' => $this->user->firstName,
@@ -25,6 +26,13 @@ class UserGetResponse extends Response
             'birthdate' => $this->user->birthdate,
             'biography' => $this->user->biography,
             'city' => $this->user->city,
+        ];
+
+        $stat = $this->data['stat'];
+
+        $result = [
+            'user' => $user,
+            'stat' => $stat,
         ];
 
         $this->successResponse($result);

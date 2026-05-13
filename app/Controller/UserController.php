@@ -33,7 +33,7 @@ class UserController extends Controller
     {
         $data = new UserGetRequest()->validation();
 
-        UserGetResponse::create($data['user'])->json();
+        UserGetResponse::create($data['user'], $data)->json();
     }
 
     /**
