@@ -59,6 +59,23 @@ services:
     networks:
       - socnet-network
 
+  init-counter-db:
+    image: postgres:17-alpine
+    container_name: init_counter_db
+    environment:
+      DB_HOST: pgmain
+      DB_PORT: 5432
+      DB_USERNAME: postgres
+      DB_PASSWORD: admin
+      DB_DATABASE: counter_db
+    volumes:
+      - ./init-counter-db.sh:/docker-entrypoint-initdb.d/init-counter-db.sh
+    depends_on:
+      - pgmain
+    networks:
+      - socnet-network
+    command: ["sh", "/docker-entrypoint-initdb.d/init-counter-db.sh"]
+
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin
@@ -139,11 +156,75 @@ services:
       - DB_DATABASE=postgres
       - DB_USERNAME=postgres
       - DB_PASSWORD=admin
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_LOGIN=admin
+      - RABBITMQ_PASSWORD=admin
     ports:
       - "9000:9000"
     command: php -S 0.0.0.0:9000 -t public
     depends_on:
       - pgmain
+      - rabbitmq
+    networks:
+      - socnet-network
+
+  counter-service:
+    build:
+      context: ./counter-service
+      dockerfile: Dockerfile
+    container_name: socnet_counter_service
+    volumes:
+      - ./counter-service:/var/www
+    environment:
+      - DB_HOST=pgmain
+      - DB_PORT=5432
+      - DB_DATABASE=counter_db
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=admin
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_USER=admin
+      - RABBITMQ_PASSWORD=admin
+    ports:
+      - "9100:9100"
+    command: php -S 0.0.0.0:9100 -t public
+    depends_on:
+      - pgmain
+      - redis
+      - rabbitmq
+      - init-counter-db
+    networks:
+      - socnet-network
+
+  counter-consumer:
+    build:
+      context: ./counter-service
+      dockerfile: Dockerfile
+    container_name: socnet_counter_consumer
+    volumes:
+      - ./counter-service:/var/www
+    environment:
+      - DB_HOST=pgmain
+      - DB_PORT=5432
+      - DB_DATABASE=counter_db
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=admin
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_USER=admin
+      - RABBITMQ_PASSWORD=admin
+    command: php artisan counter:consume
+    depends_on:
+      - pgmain
+      - redis
+      - rabbitmq
+      - counter-service
+      - init-counter-db
     networks:
       - socnet-network
 

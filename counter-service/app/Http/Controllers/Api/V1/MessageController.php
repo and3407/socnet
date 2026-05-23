@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Dialog;
 use App\Models\DialogMessage;
 use App\Models\DialogUser;
-use App\Services\RabbitMQPublisher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -57,19 +56,6 @@ class MessageController extends Controller
             'recipient_user_id' => $recipientUserId,
             'request_id' => $request->header('X-Request-Id'),
         ]);
-
-        // Publish event for counter service
-        try {
-            $publisher = new RabbitMQPublisher();
-            $publisher->publish('message.sent', [
-                'dialog_id' => $dialog->id,
-                'author_user_id' => $authorUserId,
-                'recipient_user_id' => $recipientUserId,
-                'message_id' => $message->id,
-            ]);
-        } catch (\Exception $e) {
-            Log::error('Failed to publish RabbitMQ event: ' . $e->getMessage());
-        }
 
         return response()->json([
             'messageId' => $message->id,
@@ -124,17 +110,6 @@ class MessageController extends Controller
         $otherUserId = (int) $userId;
 
         $dialog = $this->findOrCreateDialog($currentUserId, $otherUserId);
-
-        // Publish event that user opened dialog (read messages)
-        try {
-            $publisher = new RabbitMQPublisher();
-            $publisher->publish('dialog.opened', [
-                'dialog_id' => $dialog->id,
-                'user_id' => $currentUserId,
-            ]);
-        } catch (\Exception $e) {
-            Log::error('Failed to publish RabbitMQ event: ' . $e->getMessage());
-        }
 
         $messages = DialogMessage::where('dialog_id', $dialog->id)
             ->orderBy('id', 'desc')
