@@ -78,8 +78,21 @@ class UserController extends Controller
             return;
         }
 
+        // Convert UUID to internal numeric ID
+        $pdo = \App\Database\Db::getInstance();
+        $stmt = $pdo->prepare('SELECT id FROM users WHERE uuid = ?');
+        $stmt->execute([$userId]);
+        $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if (!$row) {
+            http_response_code(404);
+            header('Content-Type: application/json');
+            echo json_encode(['error' => 'User not found']);
+            return;
+        }
+        $numericUserId = (int) $row['id'];
+
         $counterClient = new CounterServiceClient();
-        $totalUnread = $counterClient->getTotalUnread($userId);
+        $totalUnread = $counterClient->getTotalUnread($numericUserId);
 
         header('Content-Type: application/json');
         echo json_encode(['total_unread' => $totalUnread]);

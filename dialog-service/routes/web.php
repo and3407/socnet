@@ -23,4 +23,6 @@ $router->group(['prefix' => 'api/v1', 'namespace' => 'Api\V1'], function () use 
     $router->post('/messages', 'MessageController@send');
     // Get dialog with user
     $router->get('/dialogs/{userId}', 'MessageController@getDialog');
+    // Mark dialog as read
+    $router->post('/dialogs/{dialogId}/read', 'MessageController@markAsRead');
 });

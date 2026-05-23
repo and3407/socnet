@@ -76,13 +76,15 @@ class ConsumeCounterEvents extends Command
 
         $service = new CounterUpdateService();
 
+        $eventData = $data['data'] ?? [];
+
         switch ($data['type']) {
             case 'message.sent':
-                $service->handleMessageSent($data);
+                $service->handleMessageSent($eventData);
                 $this->info('Processed message.sent event');
                 break;
             case 'dialog.opened':
-                $service->handleDialogOpened($data);
+                $service->handleDialogOpened($eventData);
                 $this->info('Processed dialog.opened event');
                 break;
             default:

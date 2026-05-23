@@ -33,18 +33,28 @@ class CounterUpdateService
                 'dialog_id' => $dialogId,
                 'user_id' => $recipientUserId,
             ]);
-            $dialogCount->unread_count = $dialogCount->unread_count + 1;
+            // Ensure unread_count is not null
+            $current = $dialogCount->unread_count ?? 0;
+            $dialogCount->unread_count = $current + 1;
             $dialogCount->save();
 
             // Update total unread count for recipient
             $userCount = UserUnreadCount::firstOrNew(['user_id' => $recipientUserId]);
-            $userCount->total_unread = $userCount->total_unread + 1;
+            $currentTotal = $userCount->total_unread ?? 0;
+            $userCount->total_unread = $currentTotal + 1;
             $userCount->save();
 
             // Invalidate cache
             Cache::forget("user:{$recipientUserId}:total_unread");
             Cache::forget("user:{$recipientUserId}:dialog_unreads");
             Cache::forget("user:{$recipientUserId}:dialog:{$dialogId}:unread");
+
+            Log::debug('Counters updated', [
+                'dialog_id' => $dialogId,
+                'user_id' => $recipientUserId,
+                'dialog_unread' => $dialogCount->unread_count,
+                'total_unread' => $userCount->total_unread,
+            ]);
         });
 
         Log::info('Counter updated for message.sent', [

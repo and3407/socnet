@@ -41,18 +41,20 @@
 **Схема:**
 ```sql
 CREATE TABLE user_unread_counts (
-    user_id UUID PRIMARY KEY,
+    user_id BIGINT PRIMARY KEY,
     total_unread INTEGER DEFAULT 0,
     updated_at TIMESTAMP
 );
 
 CREATE TABLE dialog_unread_counts (
-    user_id UUID,
-    dialog_id UUID,
+    user_id BIGINT,
+    dialog_id BIGINT,
     unread_count INTEGER DEFAULT 0,
     PRIMARY KEY (user_id, dialog_id)
 );
 ```
+
+**Примечание**: Используются числовые идентификаторы (BIGINT), соответствующие внутренним ID пользователей и диалогов в сервисе диалогов. Основное приложение использует UUID, которые преобразуются в числовые ID через репозиторий пользователей.
 
 ### 3. Redis кэш
 - Кэширование счетчиков пользователей с TTL 60 секунд
@@ -68,7 +70,7 @@ CREATE TABLE dialog_unread_counts (
 ### Сценарий отправки сообщения:
 1. Пользователь отправляет сообщение через основной контроллер `DialogController::sendMessageAction`
 2. Основное приложение вызывает сервис диалогов через `DialogServiceClient`
-3. Сервис диалогов сохраняет сообщение и публикует событие `MessageSent` в RabbitMQ
+3. Сервис диалогов сохраняет сообщение и публикует событие `message.sent` в RabbitMQ
 4. Сервис счетчиков потребляет событие через consumer `ConsumeCounterEvents`
 5. Сервис счетчиков:
    - Увеличивает счетчик непрочитанных для получателя
@@ -76,13 +78,21 @@ CREATE TABLE dialog_unread_counts (
    - Публикует событие подтверждения
 6. В случае ошибки запускается компенсационное действие (уменьшение счетчика)
 
+### Сценарий прочтения диалога:
+1. Пользователь открывает диалог, вызывается `POST /api/v1/dialogs/{dialogId}/read`
+2. Сервис диалогов обновляет поле `readed_at` в таблице `dialog_users`
+3. Публикуется событие `dialog.opened` в RabbitMQ
+4. Сервис счетчиков сбрасывает счетчик непрочитанных для данного диалога и пользователя
+5. Обновляется общий счетчик пользователя
+
 ### Сценарий чтения счетчиков:
-1. Клиент запрашивает количество непрочитанных сообщений
-2. Запрос идет в `CounterController::getUserUnreadCount`
-3. Сервис проверяет кэш Redis:
+1. Клиент запрашивает количество непрочитанных сообщений через основной API `GET /user/{userId}/unread-count`
+2. Основное приложение преобразует UUID пользователя в числовой ID через `UserRepository`
+3. Запрос идет в `CounterController::getUserUnreadCount`
+4. Сервис проверяет кэш Redis:
    - При наличии: возвращает из кэша
    - При отсутствии: загружает из БД, сохраняет в кэш
-4. Возвращает ответ в формате JSON
+5. Возвращает ответ в формате JSON
 
 ## Паттерн SAGA для обеспечения консистентности
 
@@ -106,10 +116,13 @@ CREATE TABLE dialog_unread_counts (
 ### GET /api/v1/counters/user/{userId}
 **Описание**: Получение общего количества непрочитанных сообщений пользователя
 
+**Параметры**:
+- `userId` - числовой идентификатор пользователя (BIGINT)
+
 **Ответ:**
 ```json
 {
-    "user_id": "uuid",
+    "user_id": 123,
     "total_unread": 5,
     "updated_at": "2026-05-23T07:00:00Z"
 }
@@ -121,8 +134,8 @@ CREATE TABLE dialog_unread_counts (
 **Ответ:**
 ```json
 {
-    "user_id": "uuid",
-    "dialog_id": "uuid",
+    "user_id": 123,
+    "dialog_id": 456,
     "unread_count": 3
 }
 ```
@@ -137,16 +150,21 @@ CREATE TABLE dialog_unread_counts (
 
 ```php
 class CounterServiceClient {
-    public function getUserUnreadCount(string $userId): int;
-    public function incrementUnreadCount(string $userId, string $dialogId): void;
-    public function resetUnreadCount(string $userId, string $dialogId): void;
+    public function getUserUnreadCount(int $userId): int;
+    public function incrementUnreadCount(int $userId, int $dialogId): void;
+    public function resetUnreadCount(int $userId, int $dialogId): void;
 }
 ```
 
-### 2. WebSocket уведомления
+### 2. Endpoint основного приложения
+Добавлен новый endpoint для получения количества непрочитанных сообщений:
+
+- `GET /user/{userId}/unread-count` - возвращает общее количество непрочитанных сообщений для пользователя (по UUID)
+
+### 3. WebSocket уведомления
 При изменении счетчика отправляется WebSocket уведомление клиенту через существующий WebSocket сервер.
 
-### 3. Аутентификация
+### 4. Аутентификация
 Используется тот же Bearer token, что и в основном приложении. Сервис счетчиков проверяет токен через middleware.
 
 ## Оптимизации для высокой нагрузки
@@ -248,3 +266,11 @@ ab -n 10000 -c 100 -H "Authorization: Bearer $TOKEN" \
 - Масштабируемость и отказоустойчивость
 
 Архитектура позволяет обрабатывать тысячи запросов в секунду с минимальной задержкой, обеспечивая пользователям актуальную информацию о непрочитанных сообщениях.
+
+## Изменения в реализации
+
+1. **Типы идентификаторов**: Вместо UUID используются числовые ID (BIGINT) для совместимости с сервисом диалогов.
+2. **Преобразование UUID → числовой ID**: Основное приложение преобразует UUID пользователя в числовой ID через `UserRepository::getNumericIdByUuid`.
+3. **Endpoint прочтения диалога**: Добавлен `POST /api/v1/dialogs/{dialogId}/read` для сброса счетчиков.
+4. **Исправление событий**: Структура событий RabbitMQ включает поле `data`, из которого извлекаются данные.
+5. **Кэширование Redis**: Используется фасад `Redis` с поддержкой в Lumen через `RedisServiceProvider`.

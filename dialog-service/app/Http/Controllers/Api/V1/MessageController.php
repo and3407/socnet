@@ -149,4 +149,56 @@ class MessageController extends Controller
 
         return response()->json($messages);
     }
+
+    /**
+     * Mark dialog as read for current user
+     */
+    public function markAsRead(Request $request, $dialogId)
+    {
+        $currentUserId = $request->header('X-User-Id');
+        if (!$currentUserId) {
+            return response()->json(['error' => 'Missing X-User-Id header'], 401);
+        }
+
+        // Check if dialog exists and user is a participant
+        $dialog = Dialog::find($dialogId);
+        if (!$dialog) {
+            return response()->json(['error' => 'Dialog not found'], 404);
+        }
+
+        $isParticipant = DB::table('dialog_users')
+            ->where('dialog_id', $dialogId)
+            ->where('user_id', $currentUserId)
+            ->whereNull('deleted_at')
+            ->exists();
+
+        if (!$isParticipant) {
+            return response()->json(['error' => 'User is not a participant of this dialog'], 403);
+        }
+
+        // Update readed_at timestamp
+        DB::table('dialog_users')
+            ->where('dialog_id', $dialogId)
+            ->where('user_id', $currentUserId)
+            ->update(['readed_at' => DB::raw('NOW()')]);
+
+        // Publish dialog.opened event for counter service
+        try {
+            $publisher = new RabbitMQPublisher();
+            $publisher->publish('dialog.opened', [
+                'dialog_id' => $dialogId,
+                'user_id' => $currentUserId,
+            ]);
+        } catch (\Exception $e) {
+            Log::error('Failed to publish RabbitMQ event: ' . $e->getMessage());
+        }
+
+        Log::info('Dialog marked as read', [
+            'dialog_id' => $dialogId,
+            'user_id' => $currentUserId,
+            'request_id' => $request->header('X-Request-Id'),
+        ]);
+
+        return response()->json(['success' => true]);
+    }
 }

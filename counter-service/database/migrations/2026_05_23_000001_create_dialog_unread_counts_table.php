@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('dialog_unread_counts', function (Blueprint $table) {
             $table->id();
-            $table->uuid('dialog_id')->index();
-            $table->uuid('user_id')->index();
+            $table->bigInteger('dialog_id')->index();
+            $table->bigInteger('user_id')->index();
             $table->integer('unread_count')->default(0);
             $table->timestamps();
 

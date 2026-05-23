@@ -103,6 +103,7 @@ $app->middleware([
 
 // Redis service provider for caching
 $app->register(Illuminate\Redis\RedisServiceProvider::class);
+$app->alias('redis', Illuminate\Support\Facades\Redis::class);
 
 /*
 |--------------------------------------------------------------------------

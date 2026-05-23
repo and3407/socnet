@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('user_unread_counts', function (Blueprint $table) {
             $table->id();
-            $table->uuid('user_id')->unique()->index();
+            $table->bigInteger('user_id')->unique()->index();
             $table->integer('total_unread')->default(0);
             $table->timestamps();
         });
