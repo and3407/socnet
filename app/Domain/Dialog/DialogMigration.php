@@ -83,6 +83,7 @@ class DialogMigration
                 dialog_id BIGINT,
                 user_id BIGINT,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                readed_at TIMESTAMP DEFAULT NULL,
                 deleted_at TIMESTAMP DEFAULT NULL,
                 PRIMARY KEY (dialog_id, user_id)
             )
