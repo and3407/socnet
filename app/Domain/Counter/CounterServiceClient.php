@@ -17,12 +17,11 @@ class CounterServiceClient
     /**
      * Get total unread count for user
      */
-    public function getTotalUnread(int $userId): int
+    public function getTotalUnread(string $userId): int
     {
-        $url = $this->baseUrl . '/counters/total';
+        $url = $this->baseUrl . '/counters/user/' . urlencode($userId);
 
         $headers = [
-            'X-User-Id: ' . $userId,
             'X-Request-Id: ' . $this->getRequestId(),
         ];
 

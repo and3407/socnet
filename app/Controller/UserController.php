@@ -7,6 +7,7 @@ use App\Domain\User\Dto\CreateUserDto;
 use App\Domain\User\Models\User;
 use App\Domain\User\Usecases\CreateUser;
 use App\Domain\User\Usecases\SearchUsers;
+use App\Domain\Counter\CounterServiceClient;
 use App\Requests\User\UserGetRequest;
 use App\Requests\User\UserPostsRequest;
 use App\Requests\User\UserRegisterRequest;
@@ -58,5 +59,29 @@ class UserController extends Controller
         $posts = new GetUserPosts()->getCacheWithPagination($user->id, $params['page']);
 
         UserPostsResponse::create($user)->json($posts);
+    }
+
+    /**
+     * Get total unread messages count for user
+     */
+    public function getUnreadCount(): void
+    {
+        // Extract userId from URL path
+        $requestUri = $_SERVER['REQUEST_URI'];
+        // Pattern: /user/{userId}/unread-count
+        if (preg_match('#^/user/([^/]+)/unread-count$#', $requestUri, $matches)) {
+            $userId = $matches[1];
+        } else {
+            http_response_code(400);
+            header('Content-Type: application/json');
+            echo json_encode(['error' => 'Invalid URL pattern']);
+            return;
+        }
+
+        $counterClient = new CounterServiceClient();
+        $totalUnread = $counterClient->getTotalUnread($userId);
+
+        header('Content-Type: application/json');
+        echo json_encode(['total_unread' => $totalUnread]);
     }
 }

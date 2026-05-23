@@ -44,6 +44,10 @@ class Router
             AuthMiddelware::execute();
 
             $this->userController->getUserPosts();
+        } elseif (preg_match('#^/user/([^/]+)/unread-count$#', $requestUri) && $_SERVER['REQUEST_METHOD'] === 'GET') {
+            AuthMiddelware::execute();
+
+            $this->userController->getUnreadCount();
         } elseif (preg_match('#^/dialog/(\d+)/send$#', $requestUri) && $_SERVER['REQUEST_METHOD'] === 'POST') {
             AuthMiddelware::execute();
 
