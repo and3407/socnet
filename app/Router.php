@@ -56,6 +56,10 @@ class Router
             AuthMiddelware::execute();
 
             $this->dialogController->getDialogByUser();
+        } elseif(preg_match('#^/dialog/(\d+)/read$#', $requestUri) && $_SERVER['REQUEST_METHOD'] === 'POST') {
+            AuthMiddelware::execute();
+
+            $this->dialogController->markDialogAsRead();
         } elseif ($requestUri === '/post/create' && $_SERVER['REQUEST_METHOD'] === 'POST') {
             AuthMiddelware::execute();
 

@@ -62,6 +62,27 @@ class DialogServiceClient
         return $response['body'];
     }
 
+    /**
+     * Mark dialog as read via dialog service
+     */
+    public function markDialogAsRead(int $currentUserId, int $dialogId): array
+    {
+        $url = $this->baseUrl . '/dialogs/' . $dialogId . '/read';
+
+        $headers = [
+            'X-User-Id: ' . $currentUserId,
+            'X-Request-Id: ' . $this->getRequestId(),
+        ];
+
+        $response = $this->makeHttpRequest('POST', $url, [], $headers);
+
+        if ($response['http_code'] !== 200) {
+            ErrorResponse::createJson('Dialog service error', HttpCode::INTERNAL_SERVER_ERROR);
+        }
+
+        return $response['body'];
+    }
+
     private function getRequestId(): string
     {
         $requestId = $_SERVER['HTTP_X_REQUEST_ID'] ?? '';
