@@ -87,6 +87,10 @@ class ConsumeCounterEvents extends Command
                 $service->handleDialogOpened($eventData);
                 $this->info('Processed dialog.opened event');
                 break;
+            case 'counter.compensation':
+                $service->handleCompensation($eventData);
+                $this->info('Processed counter.compensation event');
+                break;
             default:
                 $this->warn('Unknown event type: ' . $data['type']);
         }

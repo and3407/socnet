@@ -113,4 +113,57 @@ class CounterUpdateService
             'user_id' => $userId,
         ]);
     }
+
+    /**
+     * Handle compensation event (rollback counter increment)
+     *
+     * @param array $event
+     * @return void
+     */
+    public function handleCompensation(array $event): void
+    {
+        $dialogId = $event['dialog_id'] ?? null;
+        $recipientUserId = $event['recipient_user_id'] ?? null;
+
+        if (!$dialogId || !$recipientUserId) {
+            Log::warning('Invalid compensation event', $event);
+            return;
+        }
+
+        DB::transaction(function () use ($dialogId, $recipientUserId) {
+            // Decrease dialog unread count for recipient
+            $dialogCount = DialogUnreadCount::where('dialog_id', $dialogId)
+                ->where('user_id', $recipientUserId)
+                ->first();
+
+            if ($dialogCount && $dialogCount->unread_count > 0) {
+                $dialogCount->unread_count = max(0, $dialogCount->unread_count - 1);
+                $dialogCount->save();
+            }
+
+            // Decrease total unread count for recipient
+            $userCount = UserUnreadCount::where('user_id', $recipientUserId)->first();
+            if ($userCount && $userCount->total_unread > 0) {
+                $userCount->total_unread = max(0, $userCount->total_unread - 1);
+                $userCount->save();
+            }
+
+            // Invalidate cache
+            Cache::forget("user:{$recipientUserId}:total_unread");
+            Cache::forget("user:{$recipientUserId}:dialog_unreads");
+            Cache::forget("user:{$recipientUserId}:dialog:{$dialogId}:unread");
+
+            Log::debug('Counters compensated', [
+                'dialog_id' => $dialogId,
+                'user_id' => $recipientUserId,
+                'dialog_unread' => $dialogCount ? $dialogCount->unread_count : 0,
+                'total_unread' => $userCount ? $userCount->total_unread : 0,
+            ]);
+        });
+
+        Log::info('Counter compensated', [
+            'dialog_id' => $dialogId,
+            'recipient_user_id' => $recipientUserId,
+        ]);
+    }
 }

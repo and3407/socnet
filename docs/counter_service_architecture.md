@@ -111,6 +111,11 @@ CREATE TABLE dialog_unread_counts (
 - Consumer обрабатывает события и отслеживает состояние SAGA
 - При timeout или ошибке запускается компенсирующее событие
 
+**Код компенсирующей транзакции:**
+- В `CounterUpdateService` добавлен метод `handleCompensation`, который уменьшает счетчик непрочитанных для диалога и пользователя, а также общий счетчик пользователя.
+- Событие типа `counter.compensation` обрабатывается в `ConsumeCounterEvents` и вызывает этот метод.
+- Компенсация гарантирует, что счетчик не уходит ниже нуля и инвалидирует кэш Redis.
+
 ## API Endpoints
 
 ### GET /api/v1/counters/user/{userId}
