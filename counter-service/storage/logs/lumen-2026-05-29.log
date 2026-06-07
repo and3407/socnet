@@ -1,0 +1,58 @@
+[2026-05-29 04:33:29] local.INFO: Request {"method":"GET","url":"http://counter-service:9100/api/v1/counters/user/1","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a1917191618b8.33403690"} 
+[2026-05-29 04:33:34] local.DEBUG: Counters updated {"dialog_id":10,"user_id":1,"dialog_unread":1,"total_unread":1} 
+[2026-05-29 04:33:34] local.INFO: Counter updated for message.sent {"dialog_id":10,"recipient_user_id":1} 
+[2026-05-29 04:33:35] local.DEBUG: Counters updated {"dialog_id":10,"user_id":1,"dialog_unread":2,"total_unread":2} 
+[2026-05-29 04:33:35] local.INFO: Counter updated for message.sent {"dialog_id":10,"recipient_user_id":1} 
+[2026-05-29 04:33:38] local.INFO: Request {"method":"GET","url":"http://counter-service:9100/api/v1/counters/user/1","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a1917221a7e18.91846253"} 
+[2026-05-29 04:33:51] local.INFO: Counter reset for dialog.opened {"dialog_id":10,"user_id":4} 
+[2026-05-29 04:36:32] local.INFO: Counter reset for dialog.opened {"dialog_id":"1","user_id":"4"} 
+[2026-05-29 04:36:41] local.INFO: Counter reset for dialog.opened {"dialog_id":"1","user_id":"4"} 
+[2026-05-29 04:37:43] local.INFO: Counter reset for dialog.opened {"dialog_id":"1","user_id":"4"} 
+[2026-05-29 04:37:44] local.INFO: Counter reset for dialog.opened {"dialog_id":"1","user_id":"4"} 
+[2026-05-29 04:38:03] local.INFO: Request {"method":"GET","url":"http://counter-service:9100/api/v1/counters/user/1","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a19182b83ac20.09608823"} 
+[2026-05-29 04:38:04] local.INFO: Request {"method":"GET","url":"http://counter-service:9100/api/v1/counters/user/1","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a19182c678bf5.12372618"} 
+[2026-05-29 04:38:05] local.INFO: Request {"method":"GET","url":"http://counter-service:9100/api/v1/counters/user/1","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a19182d07ea26.43975709"} 
+[2026-05-29 04:46:06] local.INFO: Request {"method":"GET","url":"http://counter-service:9100/api/v1/counters/user/1","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a191a0e638492.28570475"} 
+[2026-05-29 04:46:27] local.INFO: Counter reset for dialog.opened {"dialog_id":"1","user_id":"4"} 
+[2026-05-29 05:18:48] local.INFO: Request {"method":"GET","url":"http://counter-service:9100/api/v1/counters/user/1","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a1921b8d321d9.72134963"} 
+[2026-05-29 05:18:49] local.INFO: Request {"method":"GET","url":"http://counter-service:9100/api/v1/counters/user/1","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a1921b9cd1483.00947384"} 
+[2026-05-29 05:18:51] local.INFO: Counter reset for dialog.opened {"dialog_id":"1","user_id":"4"} 
+[2026-05-29 05:18:52] local.INFO: Counter reset for dialog.opened {"dialog_id":"1","user_id":"4"} 
+[2026-05-29 05:20:23] local.INFO: Counter reset for dialog.opened {"dialog_id":"1","user_id":"4"} 
+[2026-05-29 05:20:54] local.INFO: Counter reset for dialog.opened {"dialog_id":"1","user_id":"4"} 
+[2026-05-29 05:22:14] local.DEBUG: Counters updated {"dialog_id":10,"user_id":1,"dialog_unread":3,"total_unread":3} 
+[2026-05-29 05:22:14] local.INFO: Counter updated for message.sent {"dialog_id":10,"recipient_user_id":1} 
+[2026-05-29 05:22:15] local.DEBUG: Counters updated {"dialog_id":10,"user_id":1,"dialog_unread":4,"total_unread":4} 
+[2026-05-29 05:22:15] local.INFO: Counter updated for message.sent {"dialog_id":10,"recipient_user_id":1} 
+[2026-05-29 05:22:15] local.DEBUG: Counters updated {"dialog_id":10,"user_id":1,"dialog_unread":5,"total_unread":5} 
+[2026-05-29 05:22:16] local.INFO: Counter updated for message.sent {"dialog_id":10,"recipient_user_id":1} 
+[2026-05-29 05:22:17] local.DEBUG: Counters updated {"dialog_id":10,"user_id":1,"dialog_unread":6,"total_unread":6} 
+[2026-05-29 05:22:17] local.INFO: Counter updated for message.sent {"dialog_id":10,"recipient_user_id":1} 
+[2026-05-29 05:22:17] local.DEBUG: Counters updated {"dialog_id":10,"user_id":1,"dialog_unread":7,"total_unread":7} 
+[2026-05-29 05:22:17] local.INFO: Counter updated for message.sent {"dialog_id":10,"recipient_user_id":1} 
+[2026-05-29 05:22:37] local.DEBUG: Counters updated {"dialog_id":10,"user_id":1,"dialog_unread":8,"total_unread":8} 
+[2026-05-29 05:22:37] local.INFO: Counter updated for message.sent {"dialog_id":10,"recipient_user_id":1} 
+[2026-05-29 05:22:45] local.INFO: Request {"method":"GET","url":"http://counter-service:9100/api/v1/counters/user/1","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a1922a5c98164.67689732"} 
+[2026-05-29 05:22:46] local.INFO: Request {"method":"GET","url":"http://counter-service:9100/api/v1/counters/user/1","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a1922a6876883.54724286"} 
+[2026-05-29 05:22:47] local.INFO: Request {"method":"GET","url":"http://counter-service:9100/api/v1/counters/user/1","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a1922a70d35e6.85958490"} 
+[2026-05-29 05:22:47] local.INFO: Request {"method":"GET","url":"http://counter-service:9100/api/v1/counters/user/1","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a1922a76cb3a8.38951414"} 
+[2026-05-29 05:22:47] local.INFO: Request {"method":"GET","url":"http://counter-service:9100/api/v1/counters/user/1","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a1922a7b7e351.31614146"} 
+[2026-05-29 05:22:57] local.DEBUG: Counters updated {"dialog_id":10,"user_id":1,"dialog_unread":9,"total_unread":9} 
+[2026-05-29 05:22:57] local.INFO: Counter updated for message.sent {"dialog_id":10,"recipient_user_id":1} 
+[2026-05-29 05:22:58] local.DEBUG: Counters updated {"dialog_id":10,"user_id":1,"dialog_unread":10,"total_unread":10} 
+[2026-05-29 05:22:58] local.INFO: Counter updated for message.sent {"dialog_id":10,"recipient_user_id":1} 
+[2026-05-29 05:22:58] local.DEBUG: Counters updated {"dialog_id":10,"user_id":1,"dialog_unread":11,"total_unread":11} 
+[2026-05-29 05:22:58] local.INFO: Counter updated for message.sent {"dialog_id":10,"recipient_user_id":1} 
+[2026-05-29 05:23:37] local.DEBUG: Counters updated {"dialog_id":10,"user_id":1,"dialog_unread":12,"total_unread":12} 
+[2026-05-29 05:23:37] local.INFO: Counter updated for message.sent {"dialog_id":10,"recipient_user_id":1} 
+[2026-05-29 05:23:37] local.DEBUG: Counters updated {"dialog_id":10,"user_id":1,"dialog_unread":13,"total_unread":13} 
+[2026-05-29 05:23:37] local.INFO: Counter updated for message.sent {"dialog_id":10,"recipient_user_id":1} 
+[2026-05-29 05:23:40] local.DEBUG: Counters updated {"dialog_id":10,"user_id":1,"dialog_unread":14,"total_unread":14} 
+[2026-05-29 05:23:40] local.INFO: Counter updated for message.sent {"dialog_id":10,"recipient_user_id":1} 
+[2026-05-29 05:23:40] local.DEBUG: Counters updated {"dialog_id":10,"user_id":1,"dialog_unread":15,"total_unread":15} 
+[2026-05-29 05:23:40] local.INFO: Counter updated for message.sent {"dialog_id":10,"recipient_user_id":1} 
+[2026-05-29 05:23:40] local.DEBUG: Counters updated {"dialog_id":10,"user_id":1,"dialog_unread":16,"total_unread":16} 
+[2026-05-29 05:23:40] local.INFO: Counter updated for message.sent {"dialog_id":10,"recipient_user_id":1} 
+[2026-05-29 05:23:41] local.DEBUG: Counters updated {"dialog_id":10,"user_id":1,"dialog_unread":17,"total_unread":17} 
+[2026-05-29 05:23:41] local.INFO: Counter updated for message.sent {"dialog_id":10,"recipient_user_id":1} 
+[2026-05-29 05:24:11] local.INFO: Request {"method":"GET","url":"http://counter-service:9100/api/v1/counters/user/1","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a1922fb83f581.82228326"} 

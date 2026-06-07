@@ -1,0 +1,54 @@
+[2026-05-29 04:33:34] local.INFO: Message sent {"message_id":28,"dialog_id":10,"author_user_id":4,"recipient_user_id":1,"request_id":"req_6a19171eb15ad2.67085331"} 
+[2026-05-29 04:33:34] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a19171eb15ad2.67085331"} 
+[2026-05-29 04:33:35] local.INFO: Message sent {"message_id":29,"dialog_id":10,"author_user_id":4,"recipient_user_id":1,"request_id":"req_6a19171fa59548.85647893"} 
+[2026-05-29 04:33:35] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a19171fa59548.85647893"} 
+[2026-05-29 04:33:51] local.INFO: Dialog retrieved {"dialog_id":10,"user_ids":[4,1],"message_count":7,"request_id":"req_6a19172fe7e5a2.55998135"} 
+[2026-05-29 04:33:51] local.INFO: Request {"method":"GET","url":"http://dialog-service:9000/api/v1/dialogs/1","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a19172fe7e5a2.55998135"} 
+[2026-05-29 04:36:32] local.INFO: Dialog marked as read {"dialog_id":"1","user_id":"4","request_id":"req_6a1917d042eea5.54387585"} 
+[2026-05-29 04:36:32] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/dialogs/1/read","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a1917d042eea5.54387585"} 
+[2026-05-29 04:36:41] local.INFO: Dialog marked as read {"dialog_id":"1","user_id":"4","request_id":"req_6a1917d9b287b1.53262544"} 
+[2026-05-29 04:36:41] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/dialogs/1/read","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a1917d9b287b1.53262544"} 
+[2026-05-29 04:37:42] local.INFO: Dialog marked as read {"dialog_id":"1","user_id":"4","request_id":"req_6a191816e97d85.29807649"} 
+[2026-05-29 04:37:43] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/dialogs/1/read","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a191816e97d85.29807649"} 
+[2026-05-29 04:37:44] local.INFO: Dialog marked as read {"dialog_id":"1","user_id":"4","request_id":"req_6a191818322676.27068550"} 
+[2026-05-29 04:37:44] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/dialogs/1/read","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a191818322676.27068550"} 
+[2026-05-29 04:46:27] local.INFO: Dialog marked as read {"dialog_id":"1","user_id":"4","request_id":"req_6a191a2344b550.74555896"} 
+[2026-05-29 04:46:27] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/dialogs/1/read","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a191a2344b550.74555896"} 
+[2026-05-29 05:18:51] local.INFO: Dialog marked as read {"dialog_id":"1","user_id":"4","request_id":"req_6a1921bbbfd1c8.21462812"} 
+[2026-05-29 05:18:51] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/dialogs/1/read","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a1921bbbfd1c8.21462812"} 
+[2026-05-29 05:18:52] local.INFO: Dialog marked as read {"dialog_id":"1","user_id":"4","request_id":"req_6a1921bc8b2b28.26430106"} 
+[2026-05-29 05:18:52] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/dialogs/1/read","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a1921bc8b2b28.26430106"} 
+[2026-05-29 05:20:23] local.INFO: Dialog marked as read {"dialog_id":"1","user_id":"4","request_id":"req_6a192217472f49.77590447"} 
+[2026-05-29 05:20:23] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/dialogs/1/read","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a192217472f49.77590447"} 
+[2026-05-29 05:20:54] local.INFO: Dialog marked as read {"dialog_id":"1","user_id":"4","request_id":"req_6a192236245b72.91249016"} 
+[2026-05-29 05:20:54] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/dialogs/1/read","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a192236245b72.91249016"} 
+[2026-05-29 05:22:14] local.INFO: Message sent {"message_id":30,"dialog_id":10,"author_user_id":4,"recipient_user_id":1,"request_id":"req_6a19228695cb73.80533216"} 
+[2026-05-29 05:22:14] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a19228695cb73.80533216"} 
+[2026-05-29 05:22:15] local.INFO: Message sent {"message_id":31,"dialog_id":10,"author_user_id":4,"recipient_user_id":1,"request_id":"req_6a19228773a448.03117522"} 
+[2026-05-29 05:22:15] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a19228773a448.03117522"} 
+[2026-05-29 05:22:15] local.INFO: Message sent {"message_id":32,"dialog_id":10,"author_user_id":4,"recipient_user_id":1,"request_id":"req_6a192287ec4a53.77493958"} 
+[2026-05-29 05:22:15] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a192287ec4a53.77493958"} 
+[2026-05-29 05:22:17] local.INFO: Message sent {"message_id":33,"dialog_id":10,"author_user_id":4,"recipient_user_id":1,"request_id":"req_6a19228937f4f6.57285798"} 
+[2026-05-29 05:22:17] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a19228937f4f6.57285798"} 
+[2026-05-29 05:22:17] local.INFO: Message sent {"message_id":34,"dialog_id":10,"author_user_id":4,"recipient_user_id":1,"request_id":"req_6a192289dc2e21.16067844"} 
+[2026-05-29 05:22:17] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a192289dc2e21.16067844"} 
+[2026-05-29 05:22:37] local.INFO: Message sent {"message_id":35,"dialog_id":10,"author_user_id":4,"recipient_user_id":1,"request_id":"req_6a19229dbc6a51.93411344"} 
+[2026-05-29 05:22:37] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a19229dbc6a51.93411344"} 
+[2026-05-29 05:22:57] local.INFO: Message sent {"message_id":36,"dialog_id":10,"author_user_id":4,"recipient_user_id":1,"request_id":"req_6a1922b1d599f8.44756642"} 
+[2026-05-29 05:22:57] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a1922b1d599f8.44756642"} 
+[2026-05-29 05:22:58] local.INFO: Message sent {"message_id":37,"dialog_id":10,"author_user_id":4,"recipient_user_id":1,"request_id":"req_6a1922b2481046.33134214"} 
+[2026-05-29 05:22:58] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a1922b2481046.33134214"} 
+[2026-05-29 05:22:58] local.INFO: Message sent {"message_id":38,"dialog_id":10,"author_user_id":4,"recipient_user_id":1,"request_id":"req_6a1922b2a94914.15410229"} 
+[2026-05-29 05:22:58] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a1922b2a94914.15410229"} 
+[2026-05-29 05:23:37] local.INFO: Message sent {"message_id":39,"dialog_id":10,"author_user_id":4,"recipient_user_id":1,"request_id":"req_6a1922d952f0d4.44415846"} 
+[2026-05-29 05:23:37] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a1922d952f0d4.44415846"} 
+[2026-05-29 05:23:37] local.INFO: Message sent {"message_id":40,"dialog_id":10,"author_user_id":4,"recipient_user_id":1,"request_id":"req_6a1922d9c473d8.99841879"} 
+[2026-05-29 05:23:37] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a1922d9c473d8.99841879"} 
+[2026-05-29 05:23:40] local.INFO: Message sent {"message_id":41,"dialog_id":10,"author_user_id":4,"recipient_user_id":1,"request_id":"req_6a1922dc2d17f9.61237201"} 
+[2026-05-29 05:23:40] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a1922dc2d17f9.61237201"} 
+[2026-05-29 05:23:40] local.INFO: Message sent {"message_id":42,"dialog_id":10,"author_user_id":4,"recipient_user_id":1,"request_id":"req_6a1922dc8478f8.26463335"} 
+[2026-05-29 05:23:40] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a1922dc8478f8.26463335"} 
+[2026-05-29 05:23:40] local.INFO: Message sent {"message_id":43,"dialog_id":10,"author_user_id":4,"recipient_user_id":1,"request_id":"req_6a1922dce45850.09625975"} 
+[2026-05-29 05:23:40] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a1922dce45850.09625975"} 
+[2026-05-29 05:23:41] local.INFO: Message sent {"message_id":44,"dialog_id":10,"author_user_id":4,"recipient_user_id":1,"request_id":"req_6a1922dd428df0.96850039"} 
+[2026-05-29 05:23:41] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a1922dd428df0.96850039"} 

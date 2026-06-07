@@ -1,0 +1,279 @@
+[2026-05-23 06:22:15] local.INFO: Message sent {"message_id":1,"dialog_id":1,"author_user_id":5,"recipient_user_id":4,"request_id":"req_6a114797582079.06663760"} 
+[2026-05-23 06:22:15] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a114797582079.06663760"} 
+[2026-05-23 06:22:16] local.INFO: Message sent {"message_id":2,"dialog_id":1,"author_user_id":5,"recipient_user_id":4,"request_id":"req_6a114798ae8815.44254795"} 
+[2026-05-23 06:22:16] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a114798ae8815.44254795"} 
+[2026-05-23 06:22:17] local.INFO: Message sent {"message_id":3,"dialog_id":1,"author_user_id":5,"recipient_user_id":4,"request_id":"req_6a11479988ae37.04324004"} 
+[2026-05-23 06:22:17] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a11479988ae37.04324004"} 
+[2026-05-23 06:25:44] local.INFO: Dialog retrieved {"dialog_id":1,"user_ids":[5,4],"message_count":3,"request_id":"req_6a11486872d440.57125150"} 
+[2026-05-23 06:25:44] local.INFO: Request {"method":"GET","url":"http://dialog-service:9000/api/v1/dialogs/4","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a11486872d440.57125150"} 
+[2026-05-23 06:29:11] local.INFO: Message sent {"message_id":1,"dialog_id":1,"author_user_id":5,"recipient_user_id":4,"request_id":"req_6a114937bc0df6.47388949"} 
+[2026-05-23 06:29:11] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a114937bc0df6.47388949"} 
+[2026-05-23 06:29:12] local.INFO: Message sent {"message_id":2,"dialog_id":1,"author_user_id":5,"recipient_user_id":4,"request_id":"req_6a11493899a037.44802968"} 
+[2026-05-23 06:29:12] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a11493899a037.44802968"} 
+[2026-05-23 06:29:14] local.INFO: Dialog retrieved {"dialog_id":1,"user_ids":[5,4],"message_count":2,"request_id":"req_6a11493a5ea1b9.10166314"} 
+[2026-05-23 06:29:14] local.INFO: Request {"method":"GET","url":"http://dialog-service:9000/api/v1/dialogs/4","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a11493a5ea1b9.10166314"} 
+[2026-05-23 07:19:04] local.ERROR: Class "PhpAmqpLib\Connection\AMQPStreamConnection" not found {"exception":"[object] (Error(code: 0): Class \"PhpAmqpLib\\Connection\\AMQPStreamConnection\" not found at /var/www/app/Services/RabbitMQPublisher.php:21)
+[stacktrace]
+#0 /var/www/app/Http/Controllers/Api/V1/MessageController.php(130): App\\Services\\RabbitMQPublisher->__construct()
+#1 /var/www/vendor/illuminate/container/BoundMethod.php(36): App\\Http\\Controllers\\Api\\V1\\MessageController->getDialog(Object(Laravel\\Lumen\\Http\\Request), '4')
+#2 /var/www/vendor/illuminate/container/Util.php(41): Illuminate\\Container\\BoundMethod::{closure:Illuminate\\Container\\BoundMethod::call():35}()
+#3 /var/www/vendor/illuminate/container/BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#4 /var/www/vendor/illuminate/container/BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Laravel\\Lumen\\Application), Array, Object(Closure))
+#5 /var/www/vendor/illuminate/container/Container.php(662): Illuminate\\Container\\BoundMethod::call(Object(Laravel\\Lumen\\Application), Array, Array, NULL)
+#6 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(391): Illuminate\\Container\\Container->call(Array, Array)
+#7 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(356): Laravel\\Lumen\\Application->callControllerCallable(Array, Array)
+#8 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(331): Laravel\\Lumen\\Application->callLumenController(Object(App\\Http\\Controllers\\Api\\V1\\MessageController), 'getDialog', Array)
+#9 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(284): Laravel\\Lumen\\Application->callControllerAction(Array)
+#10 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(269): Laravel\\Lumen\\Application->callActionOnArrayBasedRoute(Array)
+#11 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(239): Laravel\\Lumen\\Application->handleFoundRoute(Array)
+#12 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse(Array)
+#13 /var/www/vendor/laravel/lumen-framework/src/Routing/Pipeline.php(48): Laravel\\Lumen\\Application->{closure:Laravel\\Lumen\\Concerns\\RoutesRequests::dispatch():167}(Object(Laravel\\Lumen\\Http\\Request))
+#14 /var/www/app/Http/Middleware/RequestIdMiddleware.php(29): Laravel\\Lumen\\Routing\\Pipeline->{closure:Laravel\\Lumen\\Routing\\Pipeline::prepareDestination():46}(Object(Laravel\\Lumen\\Http\\Request))
+#15 /var/www/vendor/illuminate/pipeline/Pipeline.php(183): App\\Http\\Middleware\\RequestIdMiddleware->handle(Object(Laravel\\Lumen\\Http\\Request), Object(Closure))
+#16 /var/www/vendor/laravel/lumen-framework/src/Routing/Pipeline.php(30): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():158}:159}(Object(Laravel\\Lumen\\Http\\Request))
+#17 /var/www/vendor/illuminate/pipeline/Pipeline.php(119): Laravel\\Lumen\\Routing\\Pipeline->{closure:{closure:Laravel\\Lumen\\Routing\\Pipeline::carry():25}:26}(Object(Laravel\\Lumen\\Http\\Request))
+#18 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(428): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#19 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline(Array, Object(Closure))
+#20 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch(NULL)
+#21 /var/www/public/index.php(28): Laravel\\Lumen\\Application->run()
+#22 {main}
+"} 
+[2026-05-23 07:19:04] local.INFO: Request {"method":"GET","url":"http://dialog-service:9000/api/v1/dialogs/4","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a1154e89e51c3.83139852"} 
+[2026-05-23 07:19:10] local.INFO: Message sent {"message_id":3,"dialog_id":1,"author_user_id":5,"recipient_user_id":4,"request_id":"req_6a1154ee1ab2f8.24041434"} 
+[2026-05-23 07:19:10] local.ERROR: Class "PhpAmqpLib\Connection\AMQPStreamConnection" not found {"exception":"[object] (Error(code: 0): Class \"PhpAmqpLib\\Connection\\AMQPStreamConnection\" not found at /var/www/app/Services/RabbitMQPublisher.php:21)
+[stacktrace]
+#0 /var/www/app/Http/Controllers/Api/V1/MessageController.php(63): App\\Services\\RabbitMQPublisher->__construct()
+#1 /var/www/vendor/illuminate/container/BoundMethod.php(36): App\\Http\\Controllers\\Api\\V1\\MessageController->send(Object(Laravel\\Lumen\\Http\\Request))
+#2 /var/www/vendor/illuminate/container/Util.php(41): Illuminate\\Container\\BoundMethod::{closure:Illuminate\\Container\\BoundMethod::call():35}()
+#3 /var/www/vendor/illuminate/container/BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#4 /var/www/vendor/illuminate/container/BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Laravel\\Lumen\\Application), Array, Object(Closure))
+#5 /var/www/vendor/illuminate/container/Container.php(662): Illuminate\\Container\\BoundMethod::call(Object(Laravel\\Lumen\\Application), Array, Array, NULL)
+#6 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(391): Illuminate\\Container\\Container->call(Array, Array)
+#7 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(356): Laravel\\Lumen\\Application->callControllerCallable(Array, Array)
+#8 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(331): Laravel\\Lumen\\Application->callLumenController(Object(App\\Http\\Controllers\\Api\\V1\\MessageController), 'send', Array)
+#9 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(284): Laravel\\Lumen\\Application->callControllerAction(Array)
+#10 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(269): Laravel\\Lumen\\Application->callActionOnArrayBasedRoute(Array)
+#11 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(171): Laravel\\Lumen\\Application->handleFoundRoute(Array)
+#12 /var/www/vendor/laravel/lumen-framework/src/Routing/Pipeline.php(48): Laravel\\Lumen\\Application->{closure:Laravel\\Lumen\\Concerns\\RoutesRequests::dispatch():167}(Object(Laravel\\Lumen\\Http\\Request))
+#13 /var/www/app/Http/Middleware/RequestIdMiddleware.php(29): Laravel\\Lumen\\Routing\\Pipeline->{closure:Laravel\\Lumen\\Routing\\Pipeline::prepareDestination():46}(Object(Laravel\\Lumen\\Http\\Request))
+#14 /var/www/vendor/illuminate/pipeline/Pipeline.php(183): App\\Http\\Middleware\\RequestIdMiddleware->handle(Object(Laravel\\Lumen\\Http\\Request), Object(Closure))
+#15 /var/www/vendor/laravel/lumen-framework/src/Routing/Pipeline.php(30): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():158}:159}(Object(Laravel\\Lumen\\Http\\Request))
+#16 /var/www/vendor/illuminate/pipeline/Pipeline.php(119): Laravel\\Lumen\\Routing\\Pipeline->{closure:{closure:Laravel\\Lumen\\Routing\\Pipeline::carry():25}:26}(Object(Laravel\\Lumen\\Http\\Request))
+#17 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(428): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#18 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline(Array, Object(Closure))
+#19 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch(NULL)
+#20 /var/www/public/index.php(28): Laravel\\Lumen\\Application->run()
+#21 {main}
+"} 
+[2026-05-23 07:19:10] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a1154ee1ab2f8.24041434"} 
+[2026-05-23 07:19:33] local.INFO: Message sent {"message_id":4,"dialog_id":1,"author_user_id":5,"recipient_user_id":4,"request_id":"req_6a115504f3efc9.93084208"} 
+[2026-05-23 07:19:33] local.ERROR: Class "PhpAmqpLib\Connection\AMQPStreamConnection" not found {"exception":"[object] (Error(code: 0): Class \"PhpAmqpLib\\Connection\\AMQPStreamConnection\" not found at /var/www/app/Services/RabbitMQPublisher.php:21)
+[stacktrace]
+#0 /var/www/app/Http/Controllers/Api/V1/MessageController.php(63): App\\Services\\RabbitMQPublisher->__construct()
+#1 /var/www/vendor/illuminate/container/BoundMethod.php(36): App\\Http\\Controllers\\Api\\V1\\MessageController->send(Object(Laravel\\Lumen\\Http\\Request))
+#2 /var/www/vendor/illuminate/container/Util.php(41): Illuminate\\Container\\BoundMethod::{closure:Illuminate\\Container\\BoundMethod::call():35}()
+#3 /var/www/vendor/illuminate/container/BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#4 /var/www/vendor/illuminate/container/BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Laravel\\Lumen\\Application), Array, Object(Closure))
+#5 /var/www/vendor/illuminate/container/Container.php(662): Illuminate\\Container\\BoundMethod::call(Object(Laravel\\Lumen\\Application), Array, Array, NULL)
+#6 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(391): Illuminate\\Container\\Container->call(Array, Array)
+#7 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(356): Laravel\\Lumen\\Application->callControllerCallable(Array, Array)
+#8 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(331): Laravel\\Lumen\\Application->callLumenController(Object(App\\Http\\Controllers\\Api\\V1\\MessageController), 'send', Array)
+#9 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(284): Laravel\\Lumen\\Application->callControllerAction(Array)
+#10 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(269): Laravel\\Lumen\\Application->callActionOnArrayBasedRoute(Array)
+#11 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(171): Laravel\\Lumen\\Application->handleFoundRoute(Array)
+#12 /var/www/vendor/laravel/lumen-framework/src/Routing/Pipeline.php(48): Laravel\\Lumen\\Application->{closure:Laravel\\Lumen\\Concerns\\RoutesRequests::dispatch():167}(Object(Laravel\\Lumen\\Http\\Request))
+#13 /var/www/app/Http/Middleware/RequestIdMiddleware.php(29): Laravel\\Lumen\\Routing\\Pipeline->{closure:Laravel\\Lumen\\Routing\\Pipeline::prepareDestination():46}(Object(Laravel\\Lumen\\Http\\Request))
+#14 /var/www/vendor/illuminate/pipeline/Pipeline.php(183): App\\Http\\Middleware\\RequestIdMiddleware->handle(Object(Laravel\\Lumen\\Http\\Request), Object(Closure))
+#15 /var/www/vendor/laravel/lumen-framework/src/Routing/Pipeline.php(30): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():158}:159}(Object(Laravel\\Lumen\\Http\\Request))
+#16 /var/www/vendor/illuminate/pipeline/Pipeline.php(119): Laravel\\Lumen\\Routing\\Pipeline->{closure:{closure:Laravel\\Lumen\\Routing\\Pipeline::carry():25}:26}(Object(Laravel\\Lumen\\Http\\Request))
+#17 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(428): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#18 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline(Array, Object(Closure))
+#19 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch(NULL)
+#20 /var/www/public/index.php(28): Laravel\\Lumen\\Application->run()
+#21 {main}
+"} 
+[2026-05-23 07:19:33] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a115504f3efc9.93084208"} 
+[2026-05-23 07:35:00] local.INFO: Message sent {"message_id":5,"dialog_id":1,"author_user_id":5,"recipient_user_id":4,"request_id":"req_6a1158a40614e5.10068622"} 
+[2026-05-23 07:35:00] local.ERROR: Class "PhpAmqpLib\Connection\AMQPStreamConnection" not found {"exception":"[object] (Error(code: 0): Class \"PhpAmqpLib\\Connection\\AMQPStreamConnection\" not found at /var/www/app/Services/RabbitMQPublisher.php:21)
+[stacktrace]
+#0 /var/www/app/Http/Controllers/Api/V1/MessageController.php(63): App\\Services\\RabbitMQPublisher->__construct()
+#1 /var/www/vendor/illuminate/container/BoundMethod.php(36): App\\Http\\Controllers\\Api\\V1\\MessageController->send(Object(Laravel\\Lumen\\Http\\Request))
+#2 /var/www/vendor/illuminate/container/Util.php(41): Illuminate\\Container\\BoundMethod::{closure:Illuminate\\Container\\BoundMethod::call():35}()
+#3 /var/www/vendor/illuminate/container/BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#4 /var/www/vendor/illuminate/container/BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Laravel\\Lumen\\Application), Array, Object(Closure))
+#5 /var/www/vendor/illuminate/container/Container.php(662): Illuminate\\Container\\BoundMethod::call(Object(Laravel\\Lumen\\Application), Array, Array, NULL)
+#6 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(391): Illuminate\\Container\\Container->call(Array, Array)
+#7 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(356): Laravel\\Lumen\\Application->callControllerCallable(Array, Array)
+#8 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(331): Laravel\\Lumen\\Application->callLumenController(Object(App\\Http\\Controllers\\Api\\V1\\MessageController), 'send', Array)
+#9 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(284): Laravel\\Lumen\\Application->callControllerAction(Array)
+#10 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(269): Laravel\\Lumen\\Application->callActionOnArrayBasedRoute(Array)
+#11 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(171): Laravel\\Lumen\\Application->handleFoundRoute(Array)
+#12 /var/www/vendor/laravel/lumen-framework/src/Routing/Pipeline.php(48): Laravel\\Lumen\\Application->{closure:Laravel\\Lumen\\Concerns\\RoutesRequests::dispatch():167}(Object(Laravel\\Lumen\\Http\\Request))
+#13 /var/www/app/Http/Middleware/RequestIdMiddleware.php(29): Laravel\\Lumen\\Routing\\Pipeline->{closure:Laravel\\Lumen\\Routing\\Pipeline::prepareDestination():46}(Object(Laravel\\Lumen\\Http\\Request))
+#14 /var/www/vendor/illuminate/pipeline/Pipeline.php(183): App\\Http\\Middleware\\RequestIdMiddleware->handle(Object(Laravel\\Lumen\\Http\\Request), Object(Closure))
+#15 /var/www/vendor/laravel/lumen-framework/src/Routing/Pipeline.php(30): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():158}:159}(Object(Laravel\\Lumen\\Http\\Request))
+#16 /var/www/vendor/illuminate/pipeline/Pipeline.php(119): Laravel\\Lumen\\Routing\\Pipeline->{closure:{closure:Laravel\\Lumen\\Routing\\Pipeline::carry():25}:26}(Object(Laravel\\Lumen\\Http\\Request))
+#17 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(428): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#18 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline(Array, Object(Closure))
+#19 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch(NULL)
+#20 /var/www/public/index.php(28): Laravel\\Lumen\\Application->run()
+#21 {main}
+"} 
+[2026-05-23 07:35:00] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a1158a40614e5.10068622"} 
+[2026-05-23 07:35:04] local.ERROR: Class "PhpAmqpLib\Connection\AMQPStreamConnection" not found {"exception":"[object] (Error(code: 0): Class \"PhpAmqpLib\\Connection\\AMQPStreamConnection\" not found at /var/www/app/Services/RabbitMQPublisher.php:21)
+[stacktrace]
+#0 /var/www/app/Http/Controllers/Api/V1/MessageController.php(130): App\\Services\\RabbitMQPublisher->__construct()
+#1 /var/www/vendor/illuminate/container/BoundMethod.php(36): App\\Http\\Controllers\\Api\\V1\\MessageController->getDialog(Object(Laravel\\Lumen\\Http\\Request), '4')
+#2 /var/www/vendor/illuminate/container/Util.php(41): Illuminate\\Container\\BoundMethod::{closure:Illuminate\\Container\\BoundMethod::call():35}()
+#3 /var/www/vendor/illuminate/container/BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#4 /var/www/vendor/illuminate/container/BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Laravel\\Lumen\\Application), Array, Object(Closure))
+#5 /var/www/vendor/illuminate/container/Container.php(662): Illuminate\\Container\\BoundMethod::call(Object(Laravel\\Lumen\\Application), Array, Array, NULL)
+#6 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(391): Illuminate\\Container\\Container->call(Array, Array)
+#7 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(356): Laravel\\Lumen\\Application->callControllerCallable(Array, Array)
+#8 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(331): Laravel\\Lumen\\Application->callLumenController(Object(App\\Http\\Controllers\\Api\\V1\\MessageController), 'getDialog', Array)
+#9 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(284): Laravel\\Lumen\\Application->callControllerAction(Array)
+#10 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(269): Laravel\\Lumen\\Application->callActionOnArrayBasedRoute(Array)
+#11 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(239): Laravel\\Lumen\\Application->handleFoundRoute(Array)
+#12 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse(Array)
+#13 /var/www/vendor/laravel/lumen-framework/src/Routing/Pipeline.php(48): Laravel\\Lumen\\Application->{closure:Laravel\\Lumen\\Concerns\\RoutesRequests::dispatch():167}(Object(Laravel\\Lumen\\Http\\Request))
+#14 /var/www/app/Http/Middleware/RequestIdMiddleware.php(29): Laravel\\Lumen\\Routing\\Pipeline->{closure:Laravel\\Lumen\\Routing\\Pipeline::prepareDestination():46}(Object(Laravel\\Lumen\\Http\\Request))
+#15 /var/www/vendor/illuminate/pipeline/Pipeline.php(183): App\\Http\\Middleware\\RequestIdMiddleware->handle(Object(Laravel\\Lumen\\Http\\Request), Object(Closure))
+#16 /var/www/vendor/laravel/lumen-framework/src/Routing/Pipeline.php(30): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():158}:159}(Object(Laravel\\Lumen\\Http\\Request))
+#17 /var/www/vendor/illuminate/pipeline/Pipeline.php(119): Laravel\\Lumen\\Routing\\Pipeline->{closure:{closure:Laravel\\Lumen\\Routing\\Pipeline::carry():25}:26}(Object(Laravel\\Lumen\\Http\\Request))
+#18 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(428): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#19 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline(Array, Object(Closure))
+#20 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch(NULL)
+#21 /var/www/public/index.php(28): Laravel\\Lumen\\Application->run()
+#22 {main}
+"} 
+[2026-05-23 07:35:04] local.INFO: Request {"method":"GET","url":"http://dialog-service:9000/api/v1/dialogs/4","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a1158a8c71350.22768655"} 
+[2026-05-23 07:39:22] local.INFO: Message sent {"message_id":6,"dialog_id":2,"author_user_id":1,"recipient_user_id":2,"request_id":"5f40661a-1c11-4941-8b3c-166184e202fb"} 
+[2026-05-23 07:39:22] local.ERROR: Class "PhpAmqpLib\Connection\AMQPStreamConnection" not found {"exception":"[object] (Error(code: 0): Class \"PhpAmqpLib\\Connection\\AMQPStreamConnection\" not found at /var/www/app/Services/RabbitMQPublisher.php:21)
+[stacktrace]
+#0 /var/www/app/Http/Controllers/Api/V1/MessageController.php(63): App\\Services\\RabbitMQPublisher->__construct()
+#1 /var/www/vendor/illuminate/container/BoundMethod.php(36): App\\Http\\Controllers\\Api\\V1\\MessageController->send(Object(Laravel\\Lumen\\Http\\Request))
+#2 /var/www/vendor/illuminate/container/Util.php(41): Illuminate\\Container\\BoundMethod::{closure:Illuminate\\Container\\BoundMethod::call():35}()
+#3 /var/www/vendor/illuminate/container/BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#4 /var/www/vendor/illuminate/container/BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Laravel\\Lumen\\Application), Array, Object(Closure))
+#5 /var/www/vendor/illuminate/container/Container.php(662): Illuminate\\Container\\BoundMethod::call(Object(Laravel\\Lumen\\Application), Array, Array, NULL)
+#6 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(391): Illuminate\\Container\\Container->call(Array, Array)
+#7 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(356): Laravel\\Lumen\\Application->callControllerCallable(Array, Array)
+#8 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(331): Laravel\\Lumen\\Application->callLumenController(Object(App\\Http\\Controllers\\Api\\V1\\MessageController), 'send', Array)
+#9 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(284): Laravel\\Lumen\\Application->callControllerAction(Array)
+#10 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(269): Laravel\\Lumen\\Application->callActionOnArrayBasedRoute(Array)
+#11 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(171): Laravel\\Lumen\\Application->handleFoundRoute(Array)
+#12 /var/www/vendor/laravel/lumen-framework/src/Routing/Pipeline.php(48): Laravel\\Lumen\\Application->{closure:Laravel\\Lumen\\Concerns\\RoutesRequests::dispatch():167}(Object(Laravel\\Lumen\\Http\\Request))
+#13 /var/www/app/Http/Middleware/RequestIdMiddleware.php(29): Laravel\\Lumen\\Routing\\Pipeline->{closure:Laravel\\Lumen\\Routing\\Pipeline::prepareDestination():46}(Object(Laravel\\Lumen\\Http\\Request))
+#14 /var/www/vendor/illuminate/pipeline/Pipeline.php(183): App\\Http\\Middleware\\RequestIdMiddleware->handle(Object(Laravel\\Lumen\\Http\\Request), Object(Closure))
+#15 /var/www/vendor/laravel/lumen-framework/src/Routing/Pipeline.php(30): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():158}:159}(Object(Laravel\\Lumen\\Http\\Request))
+#16 /var/www/vendor/illuminate/pipeline/Pipeline.php(119): Laravel\\Lumen\\Routing\\Pipeline->{closure:{closure:Laravel\\Lumen\\Routing\\Pipeline::carry():25}:26}(Object(Laravel\\Lumen\\Http\\Request))
+#17 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(428): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#18 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline(Array, Object(Closure))
+#19 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch(NULL)
+#20 /var/www/public/index.php(28): Laravel\\Lumen\\Application->run()
+#21 {main}
+"} 
+[2026-05-23 07:39:22] local.INFO: Request {"method":"POST","url":"http://localhost:9000/api/v1/messages","ip":"185.85.0.29","user_agent":"curl/8.7.1","request_id":"5f40661a-1c11-4941-8b3c-166184e202fb"} 
+[2026-05-23 07:43:40] local.INFO: Message sent {"message_id":7,"dialog_id":3,"author_user_id":7,"recipient_user_id":4,"request_id":"req_6a115aac735b04.04735409"} 
+[2026-05-23 07:43:40] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a115aac735b04.04735409"} 
+[2026-05-23 08:02:51] local.INFO: Message sent {"message_id":8,"dialog_id":4,"author_user_id":14,"recipient_user_id":4,"request_id":"req_6a115f2b6be541.03351875"} 
+[2026-05-23 08:02:51] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a115f2b6be541.03351875"} 
+[2026-05-23 08:05:00] local.INFO: Message sent {"message_id":9,"dialog_id":1,"author_user_id":5,"recipient_user_id":4,"request_id":"req_6a115fac09c350.62035822"} 
+[2026-05-23 08:05:00] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a115fac09c350.62035822"} 
+[2026-05-23 08:05:01] local.INFO: Message sent {"message_id":10,"dialog_id":1,"author_user_id":5,"recipient_user_id":4,"request_id":"req_6a115fad65d898.52197788"} 
+[2026-05-23 08:05:01] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a115fad65d898.52197788"} 
+[2026-05-23 08:05:02] local.INFO: Message sent {"message_id":11,"dialog_id":1,"author_user_id":5,"recipient_user_id":4,"request_id":"req_6a115fae18c8f4.21175248"} 
+[2026-05-23 08:05:02] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a115fae18c8f4.21175248"} 
+[2026-05-23 08:05:04] local.INFO: Dialog retrieved {"dialog_id":1,"user_ids":[5,4],"message_count":8,"request_id":"req_6a115fb01ab090.23218906"} 
+[2026-05-23 08:05:04] local.INFO: Request {"method":"GET","url":"http://dialog-service:9000/api/v1/dialogs/4","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a115fb01ab090.23218906"} 
+[2026-05-23 08:05:04] local.INFO: Dialog retrieved {"dialog_id":1,"user_ids":[5,4],"message_count":8,"request_id":"req_6a115fb0eeafb1.88187289"} 
+[2026-05-23 08:05:04] local.INFO: Request {"method":"GET","url":"http://dialog-service:9000/api/v1/dialogs/4","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a115fb0eeafb1.88187289"} 
+[2026-05-23 08:05:05] local.INFO: Dialog retrieved {"dialog_id":1,"user_ids":[5,4],"message_count":8,"request_id":"req_6a115fb18c6c65.60750311"} 
+[2026-05-23 08:05:05] local.INFO: Request {"method":"GET","url":"http://dialog-service:9000/api/v1/dialogs/4","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a115fb18c6c65.60750311"} 
+[2026-05-23 08:05:06] local.INFO: Dialog retrieved {"dialog_id":1,"user_ids":[5,4],"message_count":8,"request_id":"req_6a115fb1f18da3.83853096"} 
+[2026-05-23 08:05:06] local.INFO: Request {"method":"GET","url":"http://dialog-service:9000/api/v1/dialogs/4","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a115fb1f18da3.83853096"} 
+[2026-05-23 08:05:43] local.INFO: Dialog retrieved {"dialog_id":1,"user_ids":[5,4],"message_count":8,"request_id":"req_6a115fd727f3f6.32155138"} 
+[2026-05-23 08:05:43] local.INFO: Request {"method":"GET","url":"http://dialog-service:9000/api/v1/dialogs/4","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a115fd727f3f6.32155138"} 
+[2026-05-23 08:13:28] local.INFO: Message sent {"message_id":12,"dialog_id":5,"author_user_id":16,"recipient_user_id":4,"request_id":"req_6a1161a8957538.34387372"} 
+[2026-05-23 08:13:28] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a1161a8957538.34387372"} 
+[2026-05-23 08:16:57] local.INFO: Message sent {"message_id":13,"dialog_id":1,"author_user_id":5,"recipient_user_id":4,"request_id":"req_6a116279bb8503.09828244"} 
+[2026-05-23 08:16:57] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a116279bb8503.09828244"} 
+[2026-05-23 08:16:58] local.INFO: Message sent {"message_id":14,"dialog_id":1,"author_user_id":5,"recipient_user_id":4,"request_id":"req_6a11627a8715c9.54708452"} 
+[2026-05-23 08:16:58] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a11627a8715c9.54708452"} 
+[2026-05-23 08:16:59] local.INFO: Message sent {"message_id":15,"dialog_id":1,"author_user_id":5,"recipient_user_id":4,"request_id":"req_6a11627af3a397.79521856"} 
+[2026-05-23 08:16:59] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a11627af3a397.79521856"} 
+[2026-05-23 08:17:04] local.INFO: Message sent {"message_id":16,"dialog_id":1,"author_user_id":5,"recipient_user_id":4,"request_id":"req_6a1162809730b9.25766603"} 
+[2026-05-23 08:17:04] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a1162809730b9.25766603"} 
+[2026-05-23 08:17:05] local.INFO: Message sent {"message_id":17,"dialog_id":1,"author_user_id":5,"recipient_user_id":4,"request_id":"req_6a116281483798.99324905"} 
+[2026-05-23 08:17:05] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a116281483798.99324905"} 
+[2026-05-23 08:17:05] local.INFO: Message sent {"message_id":18,"dialog_id":1,"author_user_id":5,"recipient_user_id":4,"request_id":"req_6a116281bbac23.75315089"} 
+[2026-05-23 08:17:05] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a116281bbac23.75315089"} 
+[2026-05-23 08:27:43] local.INFO: Message sent {"message_id":19,"dialog_id":6,"author_user_id":17,"recipient_user_id":4,"request_id":"req_6a1164ff39b840.74915180"} 
+[2026-05-23 08:27:43] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a1164ff39b840.74915180"} 
+[2026-05-23 08:31:55] local.INFO: Message sent {"message_id":20,"dialog_id":7,"author_user_id":19,"recipient_user_id":4,"request_id":"req_6a1165fb60cd32.16309572"} 
+[2026-05-23 08:31:55] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a1165fb60cd32.16309572"} 
+[2026-05-23 08:38:28] local.INFO: Request {"method":"POST","url":"http://localhost:9000/api/v1/dialogs/4/read","ip":"185.85.0.29","user_agent":"curl/8.7.1","request_id":"67fa1706-1742-4ee6-a9f1-f306c9975912"} 
+[2026-05-23 08:40:40] local.ERROR: Call to undefined function App\Http\Controllers\Api\V1\now() {"exception":"[object] (Error(code: 0): Call to undefined function App\\Http\\Controllers\\Api\\V1\\now() at /var/www/app/Http/Controllers/Api/V1/MessageController.php:183)
+[stacktrace]
+#0 /var/www/vendor/illuminate/container/BoundMethod.php(36): App\\Http\\Controllers\\Api\\V1\\MessageController->markAsRead(Object(Laravel\\Lumen\\Http\\Request), '6')
+#1 /var/www/vendor/illuminate/container/Util.php(41): Illuminate\\Container\\BoundMethod::{closure:Illuminate\\Container\\BoundMethod::call():35}()
+#2 /var/www/vendor/illuminate/container/BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#3 /var/www/vendor/illuminate/container/BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Laravel\\Lumen\\Application), Array, Object(Closure))
+#4 /var/www/vendor/illuminate/container/Container.php(662): Illuminate\\Container\\BoundMethod::call(Object(Laravel\\Lumen\\Application), Array, Array, NULL)
+#5 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(391): Illuminate\\Container\\Container->call(Array, Array)
+#6 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(356): Laravel\\Lumen\\Application->callControllerCallable(Array, Array)
+#7 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(331): Laravel\\Lumen\\Application->callLumenController(Object(App\\Http\\Controllers\\Api\\V1\\MessageController), 'markAsRead', Array)
+#8 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(284): Laravel\\Lumen\\Application->callControllerAction(Array)
+#9 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(269): Laravel\\Lumen\\Application->callActionOnArrayBasedRoute(Array)
+#10 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(239): Laravel\\Lumen\\Application->handleFoundRoute(Array)
+#11 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(174): Laravel\\Lumen\\Application->handleDispatcherResponse(Array)
+#12 /var/www/vendor/laravel/lumen-framework/src/Routing/Pipeline.php(48): Laravel\\Lumen\\Application->{closure:Laravel\\Lumen\\Concerns\\RoutesRequests::dispatch():167}(Object(Laravel\\Lumen\\Http\\Request))
+#13 /var/www/app/Http/Middleware/RequestIdMiddleware.php(29): Laravel\\Lumen\\Routing\\Pipeline->{closure:Laravel\\Lumen\\Routing\\Pipeline::prepareDestination():46}(Object(Laravel\\Lumen\\Http\\Request))
+#14 /var/www/vendor/illuminate/pipeline/Pipeline.php(183): App\\Http\\Middleware\\RequestIdMiddleware->handle(Object(Laravel\\Lumen\\Http\\Request), Object(Closure))
+#15 /var/www/vendor/laravel/lumen-framework/src/Routing/Pipeline.php(30): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():158}:159}(Object(Laravel\\Lumen\\Http\\Request))
+#16 /var/www/vendor/illuminate/pipeline/Pipeline.php(119): Laravel\\Lumen\\Routing\\Pipeline->{closure:{closure:Laravel\\Lumen\\Routing\\Pipeline::carry():25}:26}(Object(Laravel\\Lumen\\Http\\Request))
+#17 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(428): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#18 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(167): Laravel\\Lumen\\Application->sendThroughPipeline(Array, Object(Closure))
+#19 /var/www/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(112): Laravel\\Lumen\\Application->dispatch(NULL)
+#20 /var/www/public/index.php(28): Laravel\\Lumen\\Application->run()
+#21 {main}
+"} 
+[2026-05-23 08:40:40] local.INFO: Request {"method":"POST","url":"http://localhost:9000/api/v1/dialogs/6/read","ip":"185.85.0.29","user_agent":"curl/8.7.1","request_id":"3f3bdbe9-00b5-4188-9def-d38255b2acd6"} 
+[2026-05-23 08:41:37] local.INFO: Dialog marked as read {"dialog_id":"6","user_id":"17","request_id":"f910eccd-dd29-43da-af6e-312714c53a44"} 
+[2026-05-23 08:41:37] local.INFO: Request {"method":"POST","url":"http://localhost:9000/api/v1/dialogs/6/read","ip":"185.85.0.29","user_agent":"curl/8.7.1","request_id":"f910eccd-dd29-43da-af6e-312714c53a44"} 
+[2026-05-23 08:47:32] local.INFO: Message sent {"message_id":21,"dialog_id":8,"author_user_id":20,"recipient_user_id":4,"request_id":"req_6a1169a4aec0a3.31085879"} 
+[2026-05-23 08:47:32] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a1169a4aec0a3.31085879"} 
+[2026-05-23 08:56:52] local.INFO: Message sent {"message_id":22,"dialog_id":9,"author_user_id":21,"recipient_user_id":4,"request_id":"req_6a116bd4042db7.70714811"} 
+[2026-05-23 08:56:52] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a116bd4042db7.70714811"} 
+[2026-05-23 08:58:11] local.INFO: Dialog marked as read {"dialog_id":"9","user_id":"4","request_id":"d0271cb6-5046-4db7-ae3e-7cf81ef21afa"} 
+[2026-05-23 08:58:11] local.INFO: Request {"method":"POST","url":"http://localhost:9000/api/v1/dialogs/9/read","ip":"185.85.0.29","user_agent":"curl/8.7.1","request_id":"d0271cb6-5046-4db7-ae3e-7cf81ef21afa"} 
+[2026-05-23 09:05:53] local.INFO: Dialog retrieved {"dialog_id":1,"user_ids":[5,4],"message_count":14,"request_id":"req_6a116df11b0830.58046801"} 
+[2026-05-23 09:05:53] local.INFO: Request {"method":"GET","url":"http://dialog-service:9000/api/v1/dialogs/4","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a116df11b0830.58046801"} 
+[2026-05-23 09:05:54] local.INFO: Dialog retrieved {"dialog_id":1,"user_ids":[5,4],"message_count":14,"request_id":"req_6a116df2a482b8.05262852"} 
+[2026-05-23 09:05:54] local.INFO: Request {"method":"GET","url":"http://dialog-service:9000/api/v1/dialogs/4","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a116df2a482b8.05262852"} 
+[2026-05-23 09:06:52] local.INFO: Dialog retrieved {"dialog_id":1,"user_ids":[5,4],"message_count":14,"request_id":"req_6a116e2cdac345.82873670"} 
+[2026-05-23 09:06:52] local.INFO: Request {"method":"GET","url":"http://dialog-service:9000/api/v1/dialogs/4","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a116e2cdac345.82873670"} 
+[2026-05-23 09:06:53] local.INFO: Dialog retrieved {"dialog_id":1,"user_ids":[5,4],"message_count":14,"request_id":"req_6a116e2d97c149.72773433"} 
+[2026-05-23 09:06:53] local.INFO: Request {"method":"GET","url":"http://dialog-service:9000/api/v1/dialogs/4","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a116e2d97c149.72773433"} 
+[2026-05-23 09:06:54] local.INFO: Dialog retrieved {"dialog_id":1,"user_ids":[5,4],"message_count":14,"request_id":"req_6a116e2e3f4a34.93210881"} 
+[2026-05-23 09:06:54] local.INFO: Request {"method":"GET","url":"http://dialog-service:9000/api/v1/dialogs/4","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a116e2e3f4a34.93210881"} 
+[2026-05-23 09:06:54] local.INFO: Dialog retrieved {"dialog_id":1,"user_ids":[5,4],"message_count":14,"request_id":"req_6a116e2eb180e9.40865110"} 
+[2026-05-23 09:06:54] local.INFO: Request {"method":"GET","url":"http://dialog-service:9000/api/v1/dialogs/4","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a116e2eb180e9.40865110"} 
+[2026-05-23 09:07:58] local.INFO: Dialog retrieved {"dialog_id":1,"user_ids":[5,4],"message_count":14,"request_id":"req_6a116e6eb8e9f0.74180037"} 
+[2026-05-23 09:07:58] local.INFO: Request {"method":"GET","url":"http://dialog-service:9000/api/v1/dialogs/4","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a116e6eb8e9f0.74180037"} 
+[2026-05-23 10:16:18] local.INFO: Message sent {"message_id":23,"dialog_id":10,"author_user_id":4,"recipient_user_id":1,"request_id":"req_6a117e72695f56.58617146"} 
+[2026-05-23 10:16:18] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a117e72695f56.58617146"} 
+[2026-05-23 10:23:32] local.INFO: Message sent {"message_id":24,"dialog_id":10,"author_user_id":4,"recipient_user_id":1,"request_id":"req_6a118024d3b3e2.33532422"} 
+[2026-05-23 10:23:32] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a118024d3b3e2.33532422"} 
+[2026-05-23 10:23:33] local.INFO: Message sent {"message_id":25,"dialog_id":10,"author_user_id":4,"recipient_user_id":1,"request_id":"req_6a118025c5e8c4.74955105"} 
+[2026-05-23 10:23:33] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a118025c5e8c4.74955105"} 
+[2026-05-23 10:23:34] local.INFO: Message sent {"message_id":26,"dialog_id":10,"author_user_id":4,"recipient_user_id":1,"request_id":"req_6a1180267e1578.31776301"} 
+[2026-05-23 10:23:34] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a1180267e1578.31776301"} 
+[2026-05-23 10:23:35] local.INFO: Message sent {"message_id":27,"dialog_id":10,"author_user_id":4,"recipient_user_id":1,"request_id":"req_6a118027421015.74340453"} 
+[2026-05-23 10:23:35] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/messages","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a118027421015.74340453"} 
+[2026-05-23 10:25:05] local.INFO: Dialog retrieved {"dialog_id":10,"user_ids":[4,1],"message_count":5,"request_id":"req_6a118081c1a001.97612226"} 
+[2026-05-23 10:25:05] local.INFO: Request {"method":"GET","url":"http://dialog-service:9000/api/v1/dialogs/1","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a118081c1a001.97612226"} 
+[2026-05-23 10:25:07] local.INFO: Dialog retrieved {"dialog_id":10,"user_ids":[4,1],"message_count":5,"request_id":"req_6a11808315d8a3.13601989"} 
+[2026-05-23 10:25:07] local.INFO: Request {"method":"GET","url":"http://dialog-service:9000/api/v1/dialogs/1","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a11808315d8a3.13601989"} 
+[2026-05-23 10:33:24] local.INFO: Dialog marked as read {"dialog_id":"10","user_id":"1","request_id":"req_6a118274939b09.39766410"} 
+[2026-05-23 10:33:24] local.INFO: Request {"method":"POST","url":"http://dialog-service:9000/api/v1/dialogs/10/read","ip":"172.18.0.2","user_agent":null,"request_id":"req_6a118274939b09.39766410"} 

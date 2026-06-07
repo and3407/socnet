@@ -1,0 +1,89 @@
+{
+  "dashboard": {
+    "id": null,
+    "uid": "red-metrics-chat",
+    "title": "RED Metrics - Chat Service",
+    "tags": ["RED", "chat"],
+    "timezone": "browser",
+    "panels": [
+      {
+        "id": 1,
+        "title": "HTTP Requests Rate",
+        "type": "graph",
+        "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+        "targets": [
+          {
+            "expr": "rate(http_requests_total[5m])",
+            "legendFormat": "{{endpoint}} {{method}} {{status}}",
+            "refId": "A"
+          }
+        ],
+        "xaxis": { "mode": "time" },
+        "yaxes": [
+          { "format": "reqps", "label": "Requests per second" },
+          { "format": "short", "label": null }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "HTTP Errors Rate",
+        "type": "graph",
+        "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
+        "targets": [
+          {
+            "expr": "rate(http_errors_total[5m])",
+            "legendFormat": "{{endpoint}} {{method}} {{error_type}}",
+            "refId": "A"
+          }
+        ],
+        "xaxis": { "mode": "time" },
+        "yaxes": [
+          { "format": "reqps", "label": "Errors per second" },
+          { "format": "short", "label": null }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "HTTP Request Duration (avg)",
+        "type": "graph",
+        "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 },
+        "targets": [
+          {
+            "expr": "rate(http_request_duration_seconds_sum[5m]) / rate(http_request_duration_seconds_count[5m])",
+            "legendFormat": "{{endpoint}} {{method}}",
+            "refId": "A"
+          }
+        ],
+        "xaxis": { "mode": "time" },
+        "yaxes": [
+          { "format": "s", "label": "Seconds" },
+          { "format": "short", "label": null }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "HTTP Request Duration (p95)",
+        "type": "graph",
+        "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 },
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m]))",
+            "legendFormat": "{{endpoint}} {{method}}",
+            "refId": "A"
+          }
+        ],
+        "xaxis": { "mode": "time" },
+        "yaxes": [
+          { "format": "s", "label": "Seconds" },
+          { "format": "short", "label": null }
+        ]
+      }
+    ],
+    "time": { "from": "now-1h", "to": "now" },
+    "refresh": "10s",
+    "schemaVersion": 27,
+    "version": 1
+  },
+  "folderId": 0,
+  "overwrite": true
+}

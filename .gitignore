@@ -7,3 +7,5 @@
 /.vscode/
 /.composer/
 /.bash_history
+/dialog-service/vendor/
+/counter-service/vendor/
