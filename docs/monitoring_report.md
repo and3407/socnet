@@ -27,10 +27,11 @@
 - Добавлен сервис `grafana` в docker-compose.yml (порт 3000).
 - Настроен provisioning для автоматического добавления источника данных (Prometheus) и дашбордов.
 - Создан дашборд «RED Metrics - Chat Service» с панелями:
-  - Rate (количество запросов в секунду)
-  - Errors (количество ошибок)
-  - Duration (длительность запросов)
-  - Системные метрики (CPU, память)
+  - HTTP Requests Rate (количество запросов в секунду)
+  - HTTP Errors Rate (количество ошибок в секунду)
+  - Error Ratio (отношение ошибок к запросам)
+  - HTTP Request Duration (avg) – средняя длительность
+  - HTTP Request Duration (p50, p95, p99) – перцентили длительности
 - Grafana доступна по адресу `http://localhost:3000` (логин `admin`, пароль `admin`).
 
 ### 4. Интеграция бизнес-метрик RED в приложение
@@ -40,7 +41,8 @@
 - В роутер приложения добавлен эндпоинт `/metrics` (GET), который возвращает метрики.
 - При каждом запросе к API увеличиваются счетчики:
   - `http_requests_total` – общее количество запросов по endpoint, методу и статусу
-  - `http_request_duration_seconds` – длительность запроса
+  - `http_request_duration_seconds_sum`, `http_request_duration_seconds_count`, `http_request_duration_seconds_avg` – сумма, количество и средняя длительность запросов
+  - `http_request_duration_seconds_bucket` – гистограмма длительностей для вычисления перцентилей (p50, p95, p99)
   - `http_errors_total` – количество ошибок
 - Метрики доступны по адресу `http://localhost:8383/metrics`.
 
@@ -55,10 +57,17 @@
 - Эндпоинт `/metrics` возвращает корректные данные:
   - `http_requests_total` – количество запросов по endpoint, методу и статусу
   - `http_errors_total` – количество ошибок по типу
-  - `http_request_duration_seconds_avg` и `http_request_duration_seconds_count` – средняя длительность и количество измерений
+  - `http_request_duration_seconds_sum`, `http_request_duration_seconds_count`, `http_request_duration_seconds_avg` – сумма, количество и средняя длительность запросов
+  - `http_request_duration_seconds_bucket` – гистограмма длительностей для вычисления перцентилей (p50, p95, p99)
   - `php_info` – информация о версии PHP
 - Исправлена ошибка парсинга ключей Redis (неверное количество частей), теперь все метрики выводятся корректно.
-- Grafana отображает дашборд с метриками (после настройки источника данных).
+- Grafana отображает обновленный дашборд «RED Metrics - Chat Service» с панелями:
+  - HTTP Requests Rate (количество запросов в секунду)
+  - HTTP Errors Rate (количество ошибок в секунду)
+  - Error Ratio (отношение ошибок к запросам)
+  - HTTP Request Duration (avg) – средняя длительность
+  - HTTP Request Duration (p50, p95, p99) – перцентили длительности
+- После генерации нагрузки (например, с помощью `ab`) графики показывают актуальные значения.
 
 ## Скриншоты (рекомендуется сделать самостоятельно)
 

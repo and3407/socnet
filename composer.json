@@ -12,7 +12,7 @@
     "react/socket": "^1.16",
     "clue/redis-react": "^2.8",
     "predis/predis": "^2.2",
-    "promphp/prometheus_client_php": "^2.10"
+    "promphp/prometheus_client_php": "^2.15"
   },
   "autoload": {
     "psr-4": {
